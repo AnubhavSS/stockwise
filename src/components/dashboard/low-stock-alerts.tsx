@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AlertTriangle, ChevronRight } from "lucide-react";
-import { toast } from "sonner";
-
 import { EmptyState } from "@/components/shared/empty-state";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -49,8 +47,7 @@ export function LowStockAlerts({ alerts }: LowStockAlertsProps) {
                 key={alert.productId}
                 type="button"
                 onClick={() => {
-                  toast.info(`${alert.name} will open in Stock details once that module is ready.`);
-                  router.push("/stock");
+                  router.push(`/stock/${alert.productId}`);
                 }}
                 className={cn(
                   "flex w-full items-center gap-3 rounded-xl border px-3 py-2.5 text-left transition-colors hover:bg-muted/60",

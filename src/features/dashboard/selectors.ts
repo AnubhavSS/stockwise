@@ -1,5 +1,6 @@
 import {
   formatChartTick,
+  getActiveProducts,
   getAttentionProducts,
   getInStockProducts,
   getLowStockProducts,
@@ -60,6 +61,7 @@ export function deriveDashboardStats(input: {
   period: ReportPeriod;
   now?: Date;
 }): DashboardStats {
+  const catalog = getActiveProducts(input.products);
   const { start, end, previousStart, previousEnd } = getPeriodBounds(
     input.period,
     input.now,
@@ -91,15 +93,15 @@ export function deriveDashboardStats(input: {
   const previousPeriodPurchaseTotal = sumPurchaseTotals(previousPurchases);
 
   return {
-    totalProducts: input.products.length,
-    totalStockQuantity: getTotalUnits(input.products),
-    inventoryValue: input.products.reduce(
+    totalProducts: catalog.length,
+    totalStockQuantity: getTotalUnits(catalog),
+    inventoryValue: catalog.reduce(
       (total, product) => total + product.quantity * product.unitPrice,
       0,
     ),
-    lowStockCount: getAttentionProducts(input.products).length,
-    outOfStockCount: getOutOfStockProducts(input.products).length,
-    inStockCount: getInStockProducts(input.products).length,
+    lowStockCount: getAttentionProducts(catalog).length,
+    outOfStockCount: getOutOfStockProducts(catalog).length,
+    inStockCount: getInStockProducts(catalog).length,
     openSalesCount: input.sales.filter(
       (sale) => sale.status === "draft" || sale.status === "confirmed",
     ).length,
@@ -165,10 +167,11 @@ export function deriveDailyPerformance(input: {
 }
 
 export function deriveStockStatus(products: Product[]): StockStatusSlice[] {
-  const inStock = getInStockProducts(products).length;
-  const lowStock = getLowStockProducts(products).length;
-  const outOfStock = getOutOfStockProducts(products).length;
-  const total = products.length || 1;
+  const catalog = getActiveProducts(products);
+  const inStock = getInStockProducts(catalog).length;
+  const lowStock = getLowStockProducts(catalog).length;
+  const outOfStock = getOutOfStockProducts(catalog).length;
+  const total = catalog.length || 1;
 
   return [
     {

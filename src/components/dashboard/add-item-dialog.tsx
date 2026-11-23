@@ -82,14 +82,20 @@ export function AddItemDialog({ open, onOpenChange }: AddItemDialogProps) {
       return;
     }
 
-    addProduct({
+    const result = addProduct({
       name: name.trim(),
       sku: trimmedSku,
       category,
+      description: "",
       quantity: parsedQuantity,
       minimumStockLevel: parsedMin,
       unitPrice: parsedPrice,
     });
+
+    if ("error" in result) {
+      toast.error(result.error);
+      return;
+    }
 
     toast.success(`${name.trim()} added to inventory.`);
     reset();

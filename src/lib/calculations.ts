@@ -44,6 +44,18 @@ export function formatDate(isoDate: string): string {
   }).format(new Date(isoDate));
 }
 
+export function formatDateTime(isoDate: string): string {
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "UTC",
+  }).format(new Date(isoDate));
+}
+
 export function formatChartTick(isoDate: string): string {
   return new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
@@ -83,11 +95,21 @@ export function calculateLineTotal(quantity: number, unitPrice: number): number 
   return quantity * unitPrice;
 }
 
+export function calculateStockValue(
+  product: Pick<Product, "quantity" | "unitPrice">,
+): number {
+  return calculateLineTotal(product.quantity, product.unitPrice);
+}
+
 export function calculateInventoryValue(products: Product[]): number {
   return products.reduce(
-    (total, product) => total + product.quantity * product.unitPrice,
+    (total, product) => total + calculateStockValue(product),
     0,
   );
+}
+
+export function getActiveProducts(products: Product[]): Product[] {
+  return products.filter((product) => product.isActive !== false);
 }
 
 export function getTotalUnits(products: Product[]): number {

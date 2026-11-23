@@ -1,6 +1,8 @@
-import type { Product } from "@/types/inventory";
+import type { Product, ProductCategory } from "@/types/inventory";
 
-export const mockProducts: Product[] = [
+type ProductSeed = Omit<Product, "description" | "costPrice" | "isActive">;
+
+const productSeeds: ProductSeed[] = [
   {
     id: "prod-001",
     name: "Wireless Mouse",
@@ -331,4 +333,83 @@ export const mockProducts: Product[] = [
     createdAt: "2026-11-08T12:30:00.000Z",
     updatedAt: "2026-11-17T12:30:00.000Z",
   },
+];
+
+const DESCRIPTIONS: Record<string, string> = {
+  "prod-001": "Compact 2.4 GHz wireless mouse with silent clicks for daily office use.",
+  "prod-002": "1 m USB-C charging and data cable with reinforced strain relief.",
+  "prod-003": "Adjustable aluminium laptop stand for desks and meeting rooms.",
+  "prod-004": "High-speed HDMI 2.0 cable for monitors and conference displays.",
+  "prod-005": "Tactile mechanical keyboard with hot-swappable switches.",
+  "prod-006": '24-inch Full HD IPS monitor with slim bezels.',
+  "prod-007": "Powered 4-port USB hub for docking accessories.",
+  "prod-008": "Internal 1 TB SATA SSD for desktop upgrades.",
+  "prod-009": "Full-size wireless keyboard with numeric pad.",
+  "prod-010": "Padded 14-inch laptop sleeve with zip pocket.",
+  "prod-011": "DisplayPort 1.4 cable for 4K workstation displays.",
+  "prod-012": "1080p USB webcam with dual microphones.",
+  "prod-013": "Non-slip mouse pad with stitched edges.",
+  "prod-014": "USB-A to USB-A cable for peripherals and printers.",
+  "prod-015": '27-inch QHD monitor for design and analytics work.',
+  "prod-016": "500 GB NVMe drive for laptops and mini PCs.",
+  "prod-017": "Universal USB-C docking station with dual video output.",
+  "prod-018": "Cat6 ethernet cable for LAN and POS counters.",
+  "prod-019": "Portable Bluetooth speaker for retail and events.",
+  "prod-020": "20,000 mAh power bank with dual USB output.",
+  "prod-021": "3-port HDMI switch for meeting room displays.",
+  "prod-022": "2 TB USB external hard disk for backups.",
+  "prod-023": "Graphics tablet with pressure-sensitive stylus.",
+  "prod-024": "6-socket surge protector with 2 USB ports.",
+  "prod-025": "USB-C multiport hub with HDMI and SD card slot.",
+  "prod-026": "Wireless presenter with laser pointer.",
+  "prod-027": "VGA cable for legacy projectors and monitors.",
+  "prod-028": "Rugged 1 TB portable SSD with USB-C.",
+  "prod-029": "Large desk mat for keyboard and mouse setups.",
+  "prod-030": "Monitor-mounted LED light bar for desk work.",
+};
+
+function withCatalogueFields(seed: ProductSeed): Product {
+  return {
+    ...seed,
+    description:
+      DESCRIPTIONS[seed.id] ?? `${seed.name} stocked for business and retail customers.`,
+    costPrice: Math.round(seed.unitPrice * 0.62),
+    isActive: true,
+  };
+}
+
+const extraProducts: Product[] = [
+  {
+    id: "prod-031",
+    name: "Laptop Backpack",
+    sku: "LB-031",
+    category: "Accessories" satisfies ProductCategory,
+    description: "Water-resistant 15.6-inch laptop backpack with organiser pockets.",
+    quantity: 18,
+    minimumStockLevel: 8,
+    unitPrice: 1100,
+    costPrice: 680,
+    isActive: true,
+    createdAt: "2026-11-10T09:00:00.000Z",
+    updatedAt: "2026-11-22T09:00:00.000Z",
+  },
+  {
+    id: "prod-032",
+    name: "Laptop Charger",
+    sku: "LC-032",
+    category: "Accessories" satisfies ProductCategory,
+    description: "65W USB-C laptop charger compatible with major ultrabook models.",
+    quantity: 0,
+    minimumStockLevel: 10,
+    unitPrice: 1899,
+    costPrice: 1120,
+    isActive: true,
+    createdAt: "2026-11-12T09:00:00.000Z",
+    updatedAt: "2026-11-21T09:00:00.000Z",
+  },
+];
+
+export const mockProducts: Product[] = [
+  ...productSeeds.map(withCatalogueFields),
+  ...extraProducts,
 ];

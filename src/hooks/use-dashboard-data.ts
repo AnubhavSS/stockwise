@@ -9,7 +9,7 @@ import {
 } from "@/features/dashboard/selectors";
 import type { ReportPeriod } from "@/features/reports/periods";
 import { getStockAlerts } from "@/features/stock/alerts";
-import { isWithinRange } from "@/lib/calculations";
+import { getActiveProducts, isWithinRange } from "@/lib/calculations";
 import { getPeriodBounds } from "@/features/reports/periods";
 import { useInventoryStore } from "@/store/inventory-store";
 import { usePurchaseStore } from "@/store/purchase-store";
@@ -35,7 +35,7 @@ export function useDashboardData(period: ReportPeriod) {
 
   const alerts = useMemo(() => {
     const featured = ["WM-001", "UC-002", "LS-003", "HC-004"];
-    return getStockAlerts(products)
+    return getStockAlerts(getActiveProducts(products))
       .sort((a, b) => {
         const aRank = featured.indexOf(a.sku);
         const bRank = featured.indexOf(b.sku);

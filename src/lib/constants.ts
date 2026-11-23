@@ -1,5 +1,5 @@
 export const STORAGE_KEYS = {
-  inventory: "stockwise-inventory-v2",
+  inventory: "stockwise-inventory-v3",
   sales: "stockwise-sales-v2",
   purchases: "stockwise-purchases-v2",
   ui: "stockwise-ui-v2",
