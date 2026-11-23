@@ -24,10 +24,32 @@ export type DashboardStats = {
   totalStockQuantity: number;
   inventoryValue: number;
   lowStockCount: number;
+  outOfStockCount: number;
+  inStockCount: number;
   openSalesCount: number;
   openPurchaseCount: number;
-  monthlySalesTotal: number;
-  monthlyPurchaseTotal: number;
+  periodSalesTotal: number;
+  periodPurchaseTotal: number;
+  previousPeriodSalesTotal: number;
+  previousPeriodPurchaseTotal: number;
+  salesChangePercent: number;
+  purchaseChangePercent: number;
+  itemsChangePercent: number;
+};
+
+export type DailyPerformancePoint = {
+  date: string;
+  label: string;
+  sales: number;
+  purchases: number;
+};
+
+export type StockStatusSlice = {
+  key: "inStock" | "lowStock" | "outOfStock";
+  label: string;
+  count: number;
+  percent: number;
+  color: string;
 };
 
 export type ActivityType =
@@ -43,5 +65,7 @@ export type Activity = {
   title: string;
   description: string;
   referenceId?: string;
+  amount?: number;
+  quantityChange?: number;
   createdAt: string;
 };

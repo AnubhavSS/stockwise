@@ -1,113 +1,62 @@
 import type { Sale } from "@/types/sales";
 
-export const mockSales: Sale[] = [
-  {
-    id: "sale-001",
-    invoiceNumber: "INV-2026-0142",
-    customerId: "cust-001",
+const PRODUCT_PRICES: Record<string, number> = {
+  "prod-001": 799,
+  "prod-002": 349,
+  "prod-003": 1899,
+  "prod-004": 499,
+  "prod-005": 4599,
+  "prod-006": 12499,
+  "prod-007": 1299,
+  "prod-008": 6799,
+  "prod-015": 18999,
+  "prod-025": 2499,
+};
+
+const CUSTOMERS = ["cust-001", "cust-002", "cust-003", "cust-004", "cust-005"];
+const PRODUCT_IDS = Object.keys(PRODUCT_PRICES);
+
+function dateDaysAgo(daysAgo: number, hour: number, minute: number): string {
+  const date = new Date(Date.UTC(2026, 10, 23, hour, minute, 0));
+  date.setUTCDate(date.getUTCDate() - daysAgo);
+  return date.toISOString();
+}
+
+function dailyAmount(daysAgo: number): number {
+  const previousPeriod = daysAgo >= 30 && daysAgo < 60;
+  const base = previousPeriod ? 13500 : 15200;
+  const wave = Math.round(Math.sin(daysAgo / 3.4) * 3800);
+  const step = (daysAgo * 17) % 11 * 350;
+  return Math.max(6200, base + wave + step);
+}
+
+function buildSale(daysAgo: number, index: number): Sale {
+  const productId = PRODUCT_IDS[index % PRODUCT_IDS.length] ?? "prod-001";
+  const unitPrice = PRODUCT_PRICES[productId] ?? 799;
+  const totalAmount = dailyAmount(daysAgo);
+  const quantity = Math.max(1, Math.round(totalAmount / unitPrice));
+  const lineTotal = quantity * unitPrice;
+  const recent = daysAgo <= 2;
+
+  return {
+    id: `sale-${String(index + 1).padStart(3, "0")}`,
+    invoiceNumber: `INV-2026-${1034 - index}`,
+    customerId: CUSTOMERS[index % CUSTOMERS.length] ?? "cust-001",
     items: [
       {
-        productId: "prod-001",
-        quantity: 20,
-        unitPrice: 799,
-        lineTotal: 15980,
-      },
-      {
-        productId: "prod-002",
-        quantity: 15,
-        unitPrice: 349,
-        lineTotal: 5235,
+        productId,
+        quantity,
+        unitPrice,
+        lineTotal,
       },
     ],
-    totalAmount: 21215,
-    status: "fulfilled",
-    paymentStatus: "paid",
-    date: "2026-11-04T10:15:00.000Z",
-  },
-  {
-    id: "sale-002",
-    invoiceNumber: "INV-2026-0148",
-    customerId: "cust-002",
-    items: [
-      {
-        productId: "prod-004",
-        quantity: 6,
-        unitPrice: 4599,
-        lineTotal: 27594,
-      },
-      {
-        productId: "prod-003",
-        quantity: 4,
-        unitPrice: 1899,
-        lineTotal: 7596,
-      },
-    ],
-    totalAmount: 35190,
-    status: "fulfilled",
-    paymentStatus: "paid",
-    date: "2026-11-08T12:40:00.000Z",
-  },
-  {
-    id: "sale-003",
-    invoiceNumber: "INV-2026-0155",
-    customerId: "cust-003",
-    items: [
-      {
-        productId: "prod-005",
-        quantity: 3,
-        unitPrice: 12499,
-        lineTotal: 37497,
-      },
-    ],
-    totalAmount: 37497,
-    status: "confirmed",
-    paymentStatus: "unpaid",
-    date: "2026-11-14T09:05:00.000Z",
-  },
-  {
-    id: "sale-004",
-    invoiceNumber: "INV-2026-0161",
-    customerId: "cust-001",
-    items: [
-      {
-        productId: "prod-007",
-        quantity: 8,
-        unitPrice: 1299,
-        lineTotal: 10392,
-      },
-      {
-        productId: "prod-006",
-        quantity: 10,
-        unitPrice: 499,
-        lineTotal: 4990,
-      },
-    ],
-    totalAmount: 15382,
-    status: "confirmed",
-    paymentStatus: "partial",
-    date: "2026-11-18T15:20:00.000Z",
-  },
-  {
-    id: "sale-005",
-    invoiceNumber: "INV-2026-0166",
-    customerId: "cust-004",
-    items: [
-      {
-        productId: "prod-008",
-        quantity: 2,
-        unitPrice: 6799,
-        lineTotal: 13598,
-      },
-      {
-        productId: "prod-002",
-        quantity: 12,
-        unitPrice: 349,
-        lineTotal: 4188,
-      },
-    ],
-    totalAmount: 17786,
-    status: "draft",
-    paymentStatus: "unpaid",
-    date: "2026-11-21T07:50:00.000Z",
-  },
-];
+    totalAmount: lineTotal,
+    status: recent ? "confirmed" : "fulfilled",
+    paymentStatus: daysAgo === 1 ? "partial" : recent ? "unpaid" : "paid",
+    date: dateDaysAgo(daysAgo, 9 + (index % 6), 10 + (index % 40)),
+  };
+}
+
+export const mockSales: Sale[] = Array.from({ length: 90 }, (_, daysAgo) =>
+  buildSale(daysAgo, daysAgo),
+);

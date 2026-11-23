@@ -8,6 +8,7 @@ export const siteConfig = {
   locale: "en-IN",
   demoUser: {
     name: "Anubhav Sharma",
+    firstName: "Anubhav",
     initials: "AS",
     role: "Operations Manager",
   },

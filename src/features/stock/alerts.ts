@@ -1,8 +1,8 @@
-import { getLowStockProducts } from "@/lib/calculations";
+import { getAttentionProducts } from "@/lib/calculations";
 import type { Product } from "@/types/inventory";
 
 export function getStockAlerts(products: Product[]) {
-  return getLowStockProducts(products).map((product) => ({
+  return getAttentionProducts(products).map((product) => ({
     productId: product.id,
     sku: product.sku,
     name: product.name,

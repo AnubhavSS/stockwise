@@ -1,104 +1,55 @@
 import type { Purchase } from "@/types/purchase";
 
-export const mockPurchases: Purchase[] = [
-  {
-    id: "po-001",
-    purchaseOrderNumber: "PO-2026-0088",
-    supplierId: "supp-001",
-    items: [
-      {
-        productId: "prod-001",
-        quantity: 50,
-        unitCost: 520,
-        lineTotal: 26000,
-        receivedQuantity: 50,
-      },
-      {
-        productId: "prod-002",
-        quantity: 120,
-        unitCost: 180,
-        lineTotal: 21600,
-        receivedQuantity: 120,
-      },
-    ],
-    totalAmount: 47600,
-    status: "received",
-    expectedDate: "2026-10-28T00:00:00.000Z",
-    receivedDate: "2026-10-27T11:00:00.000Z",
-  },
-  {
-    id: "po-002",
-    purchaseOrderNumber: "PO-2026-0094",
-    supplierId: "supp-004",
-    items: [
-      {
-        productId: "prod-005",
-        quantity: 12,
-        unitCost: 9800,
-        lineTotal: 117600,
-        receivedQuantity: 12,
-      },
-      {
-        productId: "prod-006",
-        quantity: 40,
-        unitCost: 240,
-        lineTotal: 9600,
-        receivedQuantity: 40,
-      },
-    ],
-    totalAmount: 127200,
-    status: "received",
-    expectedDate: "2026-11-06T00:00:00.000Z",
-    receivedDate: "2026-11-05T16:30:00.000Z",
-  },
-  {
-    id: "po-003",
-    purchaseOrderNumber: "PO-2026-0101",
-    supplierId: "supp-002",
-    items: [
-      {
-        productId: "prod-004",
-        quantity: 20,
-        unitCost: 3100,
-        lineTotal: 62000,
-        receivedQuantity: 10,
-      },
-      {
-        productId: "prod-003",
-        quantity: 15,
-        unitCost: 1250,
-        lineTotal: 18750,
-        receivedQuantity: 15,
-      },
-    ],
-    totalAmount: 80750,
-    status: "partially_received",
-    expectedDate: "2026-11-18T00:00:00.000Z",
-    receivedDate: null,
-  },
-  {
-    id: "po-004",
-    purchaseOrderNumber: "PO-2026-0107",
-    supplierId: "supp-003",
-    items: [
-      {
-        productId: "prod-006",
-        quantity: 80,
-        unitCost: 240,
-        lineTotal: 19200,
-        receivedQuantity: 0,
-      },
-      {
-        productId: "prod-007",
-        quantity: 25,
-        unitCost: 780,
-        lineTotal: 19500,
-        receivedQuantity: 0,
-      },
-    ],
-    totalAmount: 38700,
-    status: "ordered",
-    expectedDate: "2026-11-26T00:00:00.000Z",
-    receivedDate: null,
-  },
+const SUPPLIERS = ["supp-001", "supp-002", "supp-003", "supp-004"];
+const PRODUCTS: Array<{ id: string; unitCost: number }> = [
+  { id: "prod-001", unitCost: 520 },
+  { id: "prod-002", unitCost: 180 },
+  { id: "prod-005", unitCost: 3100 },
+  { id: "prod-007", unitCost: 780 },
+  { id: "prod-008", unitCost: 4300 },
+  { id: "prod-011", unitCost: 310 },
+  { id: "prod-013", unitCost: 140 },
+  { id: "prod-025", unitCost: 1550 },
 ];
+
+function dateDaysAgo(daysAgo: number, hour: number): string {
+  const date = new Date(Date.UTC(2026, 10, 23, hour, 0, 0));
+  date.setUTCDate(date.getUTCDate() - daysAgo);
+  return date.toISOString();
+}
+
+function amountForDay(daysAgo: number): number {
+  const previousPeriod = daysAgo >= 30 && daysAgo < 60;
+  const base = previousPeriod ? 9800 : 10600;
+  const wave = Math.round(Math.sin(daysAgo / 4.2) * 2200);
+  const step = (daysAgo * 13) % 7 * 280;
+  return Math.max(4200, base + wave + step);
+}
+
+export const mockPurchases: Purchase[] = Array.from({ length: 90 }, (_, index) => {
+  const daysAgo = index;
+  const product = PRODUCTS[index % PRODUCTS.length] ?? PRODUCTS[0];
+  const totalAmount = amountForDay(daysAgo);
+  const quantity = Math.max(1, Math.round(totalAmount / product.unitCost));
+  const lineTotal = quantity * product.unitCost;
+  const recent = daysAgo <= 4;
+
+  return {
+    id: `po-${String(index + 1).padStart(3, "0")}`,
+    purchaseOrderNumber: `PO-2026-${89 + index}`,
+    supplierId: SUPPLIERS[index % SUPPLIERS.length] ?? "supp-001",
+    items: [
+      {
+        productId: product.id,
+        quantity,
+        unitCost: product.unitCost,
+        lineTotal,
+        receivedQuantity: recent && index === 2 ? Math.floor(quantity / 2) : quantity,
+      },
+    ],
+    totalAmount: lineTotal,
+    status: recent && index === 2 ? "partially_received" : "received",
+    expectedDate: dateDaysAgo(Math.max(0, daysAgo - 1), 0),
+    receivedDate: dateDaysAgo(daysAgo, 11),
+  };
+});
