@@ -1,0 +1,48 @@
+import type { Supplier } from "@/types/supplier";
+
+export const mockSuppliers: Supplier[] = [
+  {
+    id: "supp-001",
+    name: "Tech Distributors",
+    contactPerson: "Karan Malhotra",
+    email: "orders@techdist.in",
+    phone: "+91 22 4001 1200",
+    city: "Mumbai",
+    gstin: "27AAPCT1111F1Z9",
+    status: "active",
+    leadTimeDays: 4,
+  },
+  {
+    id: "supp-002",
+    name: "Mega Supplies",
+    contactPerson: "Neha Reddy",
+    email: "sales@megasupplies.in",
+    phone: "+91 40 2345 7788",
+    city: "Hyderabad",
+    gstin: "36AAPCM2222G1Z4",
+    status: "active",
+    leadTimeDays: 6,
+  },
+  {
+    id: "supp-003",
+    name: "Gadget World",
+    contactPerson: "Vikram Joshi",
+    email: "purchase@gadgetworld.in",
+    phone: "+91 79 2658 4411",
+    city: "Ahmedabad",
+    gstin: "24AAPCG3333H1Z0",
+    status: "active",
+    leadTimeDays: 5,
+  },
+  {
+    id: "supp-004",
+    name: "Prime Electronics",
+    contactPerson: "Anita Desai",
+    email: "support@primeelec.in",
+    phone: "+91 80 4123 9900",
+    city: "Bengaluru",
+    gstin: "29AAPCP4444J1Z7",
+    status: "active",
+    leadTimeDays: 3,
+  },
+];

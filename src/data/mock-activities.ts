@@ -1,0 +1,102 @@
+import type { Activity } from "@/types/common";
+import type { StockMovement } from "@/types/inventory";
+
+export const mockStockMovements: StockMovement[] = [
+  {
+    id: "mov-001",
+    productId: "prod-001",
+    type: "purchase",
+    quantityChange: 50,
+    referenceId: "po-001",
+    createdAt: "2026-10-27T11:00:00.000Z",
+    remarks: "Goods received against PO-2026-0088",
+  },
+  {
+    id: "mov-002",
+    productId: "prod-002",
+    type: "purchase",
+    quantityChange: 120,
+    referenceId: "po-001",
+    createdAt: "2026-10-27T11:00:00.000Z",
+    remarks: "Goods received against PO-2026-0088",
+  },
+  {
+    id: "mov-003",
+    productId: "prod-001",
+    type: "sale",
+    quantityChange: -20,
+    referenceId: "sale-001",
+    createdAt: "2026-11-04T10:15:00.000Z",
+    remarks: "Issued against INV-2026-0142",
+  },
+  {
+    id: "mov-004",
+    productId: "prod-005",
+    type: "purchase",
+    quantityChange: 12,
+    referenceId: "po-002",
+    createdAt: "2026-11-05T16:30:00.000Z",
+    remarks: "Goods received against PO-2026-0094",
+  },
+  {
+    id: "mov-005",
+    productId: "prod-004",
+    type: "sale",
+    quantityChange: -6,
+    referenceId: "sale-002",
+    createdAt: "2026-11-08T12:40:00.000Z",
+    remarks: "Issued against INV-2026-0148",
+  },
+  {
+    id: "mov-006",
+    productId: "prod-006",
+    type: "adjustment",
+    quantityChange: -3,
+    referenceId: "adj-001",
+    createdAt: "2026-11-12T08:00:00.000Z",
+    remarks: "Damaged units written off after QC",
+  },
+];
+
+export const mockActivities: Activity[] = [
+  {
+    id: "act-001",
+    type: "purchase_received",
+    title: "Purchase received",
+    description: "PO-2026-0094 received from Prime Electronics",
+    referenceId: "po-002",
+    createdAt: "2026-11-05T16:30:00.000Z",
+  },
+  {
+    id: "act-002",
+    type: "sale_paid",
+    title: "Sale settled",
+    description: "INV-2026-0148 paid by Bright Electronics",
+    referenceId: "sale-002",
+    createdAt: "2026-11-08T14:10:00.000Z",
+  },
+  {
+    id: "act-003",
+    type: "stock_adjusted",
+    title: "Stock adjustment",
+    description: "3 HDMI cables written off after QC",
+    referenceId: "adj-001",
+    createdAt: "2026-11-12T08:00:00.000Z",
+  },
+  {
+    id: "act-004",
+    type: "sale_created",
+    title: "Sale confirmed",
+    description: "INV-2026-0155 created for City Computers",
+    referenceId: "sale-003",
+    createdAt: "2026-11-14T09:05:00.000Z",
+  },
+  {
+    id: "act-005",
+    type: "purchase_created",
+    title: "Purchase ordered",
+    description: "PO-2026-0107 sent to Gadget World",
+    referenceId: "po-004",
+    createdAt: "2026-11-20T11:45:00.000Z",
+  },
+];

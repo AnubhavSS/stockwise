@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Stockwise">
+  <rect width="64" height="64" rx="14" fill="#111C32"/>
+  <path d="M16 24.5 32 16l16 8.5v19L32 52 16 43.5v-19Z" fill="none" stroke="#F28C28" stroke-width="3"/>
+  <path d="M32 32.5 48 24.5M32 32.5V52M32 32.5 16 24.5" fill="none" stroke="#FFFFFF" stroke-width="2.4"/>
+</svg>
