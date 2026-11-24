@@ -26,7 +26,7 @@ export default function PurchaseDetailsPage({
   params: Promise<{ id: string }>;
 }) {
   return (
-    <Suspense fallback={<LoadingState rows={8} />}>
+    <Suspense fallback={<LoadingState label="Loading purchase order…" />}>
       <PurchaseDetailsLoader params={params} />
     </Suspense>
   );

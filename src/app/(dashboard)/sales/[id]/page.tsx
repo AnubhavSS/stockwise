@@ -24,7 +24,7 @@ export default function SaleDetailsPage({
   params,
 }: PageProps<"/sales/[id]">) {
   return (
-    <Suspense fallback={<LoadingState rows={8} />}>
+    <Suspense fallback={<LoadingState label="Loading invoice…" />}>
       <SaleDetailsLoader params={params} />
     </Suspense>
   );

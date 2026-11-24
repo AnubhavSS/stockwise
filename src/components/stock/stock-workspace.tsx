@@ -58,7 +58,7 @@ export function StockWorkspace() {
   }
 
   if (!mounted) {
-    return <LoadingState rows={8} />;
+    return <LoadingState label="Loading stock…" />;
   }
 
   return (

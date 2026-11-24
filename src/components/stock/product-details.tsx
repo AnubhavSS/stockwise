@@ -72,7 +72,7 @@ export function ProductDetails({ productId }: ProductDetailsProps) {
   }, [product]);
 
   if (!mounted) {
-    return <LoadingState rows={8} />;
+    return <LoadingState label="Loading product…" />;
   }
 
   if (!product) {

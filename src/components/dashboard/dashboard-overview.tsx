@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { useState, useSyncExternalStore } from "react";
 
 import { LoadingState } from "@/components/shared/loading-state";
+import { ChartLoader } from "@/components/shared/page-loader";
 
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { DashboardStats } from "@/components/dashboard/dashboard-stats";
@@ -25,7 +26,11 @@ const SalesPurchaseChart = dynamic(
     ),
   {
     ssr: false,
-    loading: () => <Card className="h-90 border-border bg-card shadow-sm ring-1 ring-border" />,
+    loading: () => (
+      <Card className="flex h-90 items-center justify-center border-border bg-card shadow-sm ring-1 ring-border">
+        <ChartLoader />
+      </Card>
+    ),
   },
 );
 
@@ -36,7 +41,11 @@ const StockStatusChart = dynamic(
     ),
   {
     ssr: false,
-    loading: () => <Card className="h-full min-h-80 border-border bg-card shadow-sm ring-1 ring-border" />,
+    loading: () => (
+      <Card className="flex h-full min-h-80 items-center justify-center border-border bg-card shadow-sm ring-1 ring-border">
+        <ChartLoader />
+      </Card>
+    ),
   },
 );
 
@@ -52,7 +61,7 @@ export function DashboardOverview() {
   const data = useDashboardData(period);
 
   if (!mounted) {
-    return <LoadingState rows={8} />;
+    return <LoadingState label="Loading dashboard…" />;
   }
 
   return (

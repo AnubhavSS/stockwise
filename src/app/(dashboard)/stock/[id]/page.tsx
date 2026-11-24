@@ -24,7 +24,7 @@ export default function ProductDetailsPage({
   params,
 }: PageProps<"/stock/[id]">) {
   return (
-    <Suspense fallback={<LoadingState rows={8} />}>
+    <Suspense fallback={<LoadingState label="Loading product…" />}>
       <ProductDetailsLoader params={params} />
     </Suspense>
   );

@@ -1,20 +1,14 @@
 /**
- * Skeleton placeholder while a client workspace hydrates.
+ * In-page loader shown while a workspace hydrates or a Suspense boundary waits.
  */
 
-import { Skeleton } from "@/components/ui/skeleton";
+import { PageLoader } from "@/components/shared/page-loader";
 
 type LoadingStateProps = {
   rows?: number;
+  label?: string;
 };
 
-export function LoadingState({ rows = 5 }: LoadingStateProps) {
-  return (
-    <div className="space-y-3" role="status" aria-live="polite">
-      <span className="sr-only">Loading</span>
-      {Array.from({ length: rows }).map((_, index) => (
-        <Skeleton key={index} className="h-12 w-full rounded-lg" />
-      ))}
-    </div>
-  );
+export function LoadingState({ label = "Loading page…" }: LoadingStateProps) {
+  return <PageLoader label={label} />;
 }

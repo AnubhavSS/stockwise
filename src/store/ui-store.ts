@@ -42,9 +42,6 @@ export const useUiStore = create<UiState>()(
       partialize: (state) => ({
         sidebarCollapsed: state.sidebarCollapsed,
       }),
-      onRehydrateStorage: () => () => {
-        useUiStore.setState({ hasHydrated: true });
-      },
     },
   ),
 );

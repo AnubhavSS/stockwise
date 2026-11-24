@@ -46,7 +46,7 @@ export function SaleDetails({ saleId }: SaleDetailsProps) {
   const [cancelOpen, setCancelOpen] = useState(false);
 
   if (!mounted) {
-    return <LoadingState rows={8} />;
+    return <LoadingState label="Loading invoice…" />;
   }
 
   if (!sale) {

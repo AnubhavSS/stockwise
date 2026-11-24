@@ -73,7 +73,7 @@ export function StockHistoryWorkspace() {
   }, [filters, products, stockMovements]);
 
   if (!mounted) {
-    return <LoadingState rows={8} />;
+    return <LoadingState label="Loading stock history…" />;
   }
 
   return (

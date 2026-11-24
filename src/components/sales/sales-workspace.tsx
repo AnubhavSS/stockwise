@@ -4,7 +4,6 @@
  * Sales module: filters, summary, chart, and invoice table from the sales store.
  */
 import { useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
 import { LoadingState } from "@/components/shared/loading-state";
@@ -28,14 +27,14 @@ import {
   tabCounts,
   type SalesFilters,
 } from "@/features/sales/selectors";
+import { useCreateQuery } from "@/hooks/use-create-query";
 import { useHasMounted } from "@/hooks/use-has-mounted";
 import { useSalesStore } from "@/store/sales-store";
 import type { Sale } from "@/types/sales";
 
 export function SalesWorkspace() {
   const mounted = useHasMounted();
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const [createOpen, setCreateOpen] = useCreateQuery("/sales");
   const sales = useSalesStore((state) => state.sales);
   const customers = useSalesStore((state) => state.customers);
   const [filters, setFilters] = useState<SalesFilters>(DEFAULT_SALES_FILTERS);
@@ -43,7 +42,6 @@ export function SalesWorkspace() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [createOpen, setCreateOpen] = useState(searchParams.get("create") === "1");
   const [editSale, setEditSale] = useState<Sale | null>(null);
   const [cancelSale, setCancelSale] = useState<Sale | null>(null);
 
@@ -65,7 +63,7 @@ export function SalesWorkspace() {
   }
 
   if (!mounted) {
-    return <LoadingState rows={8} />;
+    return <LoadingState label="Loading sales…" />;
   }
 
   return (
@@ -123,9 +121,6 @@ export function SalesWorkspace() {
           if (!open) {
             setCreateOpen(false);
             setEditSale(null);
-            if (searchParams.get("create") === "1") {
-              router.replace("/sales");
-            }
           }
         }}
       />

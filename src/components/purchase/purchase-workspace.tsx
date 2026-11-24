@@ -4,7 +4,6 @@
  * Purchase module: filters, summary, chart, and PO table from the purchase store.
  */
 import { useMemo, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
 import { CancelPurchaseDialog } from "@/components/purchase/cancel-purchase-dialog";
@@ -29,14 +28,14 @@ import {
   tabCounts,
   type PurchaseFilters,
 } from "@/features/purchase/selectors";
+import { useCreateQuery } from "@/hooks/use-create-query";
 import { useHasMounted } from "@/hooks/use-has-mounted";
 import { usePurchaseStore } from "@/store/purchase-store";
 import type { Purchase } from "@/types/purchase";
 
 export function PurchaseWorkspace() {
   const mounted = useHasMounted();
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const [createOpen, setCreateOpen] = useCreateQuery("/purchase");
   const purchases = usePurchaseStore((state) => state.purchases);
   const suppliers = usePurchaseStore((state) => state.suppliers);
   const [filters, setFilters] = useState<PurchaseFilters>(DEFAULT_PURCHASE_FILTERS);
@@ -44,7 +43,6 @@ export function PurchaseWorkspace() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
-  const [createOpen, setCreateOpen] = useState(searchParams.get("create") === "1");
   const [editPurchase, setEditPurchase] = useState<Purchase | null>(null);
   const [receivePurchase, setReceivePurchase] = useState<Purchase | null>(null);
   const [cancelPurchase, setCancelPurchase] = useState<Purchase | null>(null);
@@ -73,7 +71,7 @@ export function PurchaseWorkspace() {
   }
 
   if (!mounted) {
-    return <LoadingState rows={8} />;
+    return <LoadingState label="Loading purchases…" />;
   }
 
   return (
@@ -133,9 +131,6 @@ export function PurchaseWorkspace() {
           if (!open) {
             setCreateOpen(false);
             setEditPurchase(null);
-            if (searchParams.get("create") === "1") {
-              router.replace("/purchase");
-            }
           }
         }}
       />

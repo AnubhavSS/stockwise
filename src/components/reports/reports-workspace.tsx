@@ -200,7 +200,7 @@ export function ReportsWorkspace() {
   }
 
   if (!mounted) {
-    return <LoadingState rows={8} />;
+    return <LoadingState label="Loading reports…" />;
   }
 
   return (
