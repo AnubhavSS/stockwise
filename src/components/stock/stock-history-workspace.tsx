@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Global movement log with type and product filters.
+ */
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -83,6 +86,7 @@ export function StockHistoryWorkspace() {
         title="Stock History"
         description="Incoming and outgoing inventory movements across all products."
       />
+      {/* Search, movement type, and optional from/to dates */}
       <div className="flex flex-col gap-3 rounded-xl border border-border bg-card p-4 shadow-sm ring-1 ring-border lg:flex-row lg:items-end">
         <SearchInput
           className="min-w-0 flex-1"
@@ -122,6 +126,7 @@ export function StockHistoryWorkspace() {
           }
         />
       </div>
+      {/* Newest first, with running stock-after from the ledger */}
       <StockHistoryTable rows={rows} />
     </div>
   );

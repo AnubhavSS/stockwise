@@ -1,3 +1,4 @@
+/** Filter, search, paginate, and summarise purchase orders. */
 import {
   formatChartTick,
   isWithinRange,

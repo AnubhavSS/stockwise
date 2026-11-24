@@ -1,3 +1,8 @@
+/**
+ * Root HTML shell. `suppressHydrationWarning` on html/body ignores extra
+ * attributes some browsers inject (for example location="localhost") so React
+ * does not report a false mismatch.
+ */
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 

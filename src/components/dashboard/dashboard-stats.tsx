@@ -1,3 +1,7 @@
+/**
+ * Four dashboard KPI cards derived from the shared stores for the selected period.
+ */
+
 import {
   AlertTriangle,
   Boxes,
@@ -70,6 +74,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
 
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {/* Each card: label, formatted value, vs-previous trend, and hint */}
       {cards.map((card) => {
         const Icon = card.icon;
         return (

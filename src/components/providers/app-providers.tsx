@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * Client providers. Rehydrates Zustand stores from localStorage after mount
+ * so the server-rendered page does not flash mismatched catalogue data.
+ */
+
 import { useEffect } from "react";
 import type { ReactNode } from "react";
 

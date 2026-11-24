@@ -1,3 +1,10 @@
+/**
+ * Purchase orders and receipts.
+ *
+ * Creating a PO does not add stock. Stock increases only when goods are
+ * received (`receivedQuantity` and `receipts`). Cancelled/draft orders are
+ * excluded from spend totals.
+ */
 import type { PaymentMethod, PaymentStatus } from "@/types/sales";
 
 export type PurchaseStatus =

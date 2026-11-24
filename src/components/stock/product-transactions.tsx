@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Sales and purchases that referenced this product.
+ */
 import { EmptyState } from "@/components/shared/empty-state";
 import { StatusBadge } from "@/components/shared/status-badge";
 import {

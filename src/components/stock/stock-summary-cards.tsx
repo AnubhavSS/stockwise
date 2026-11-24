@@ -1,3 +1,7 @@
+/**
+ * Live counts of products by stock status.
+ */
+
 import { AlertTriangle, Boxes, PackageCheck, PackageX } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
@@ -43,6 +47,7 @@ export function StockSummaryCards({ summary }: StockSummaryCardsProps) {
 
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {/* Counts of SKUs, not units — except the units card itself */}
       {cards.map((card) => {
         const Icon = card.icon;
         return (

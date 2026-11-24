@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Single-select filter used on sales, purchase, and stock toolbars.
+ */
 import {
   Select,
   SelectContent,

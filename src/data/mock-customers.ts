@@ -1,3 +1,4 @@
+/** Seed trade customers, including the walk-in customer used at the counter. */
 import type { Customer } from "@/types/customer";
 
 export const mockCustomers: Customer[] = [

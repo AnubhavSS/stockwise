@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * From/to date inputs for custom report and list ranges.
+ */
 import { Input } from "@/components/ui/input";
 import type { DateRange } from "@/types/common";
 

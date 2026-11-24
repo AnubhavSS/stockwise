@@ -1,3 +1,7 @@
+/**
+ * Dashboard KPIs and charts from the shared stores.
+ * Sales totals use completed invoices only; purchase totals skip drafts and cancellations.
+ */
 import {
   formatChartTick,
   getActiveProducts,
@@ -23,6 +27,7 @@ import type { Product } from "@/types/inventory";
 import type { Purchase } from "@/types/purchase";
 import type { Sale } from "@/types/sales";
 
+// Cancelled and draft sales never contribute to dashboard revenue.
 const ACTIVE_SALE_STATUSES: Sale["status"][] = ["completed"];
 const ACTIVE_PURCHASE_STATUSES: Purchase["status"][] = [
   "ordered",

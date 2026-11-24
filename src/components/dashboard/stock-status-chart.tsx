@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Donut of current In Stock / Low Stock / Out of Stock product counts.
+ */
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,6 +21,7 @@ export function StockStatusChart({ slices, totalItems }: StockStatusChartProps) 
         <CardTitle>Stock Status</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col items-center justify-center gap-5">
+        {/* Donut of SKU counts; total sits in the hole */}
         <div className="relative h-[180px] w-[180px]">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>

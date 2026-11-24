@@ -1,3 +1,7 @@
+/**
+ * Shared button. When `render` is a Link (or other non-button), Base UI must
+ * use nativeButton={false} so it does not expect a real <button> element.
+ */
 import { Button as ButtonPrimitive } from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "cn"

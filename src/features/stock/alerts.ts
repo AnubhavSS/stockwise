@@ -1,3 +1,4 @@
+/** Products at or below the reorder point, with how many units they are short. */
 import { getAttentionProducts } from "@/lib/calculations";
 import type { Product } from "@/types/inventory";
 

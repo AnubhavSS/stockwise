@@ -1,3 +1,8 @@
+/**
+ * Purchase totals reuse sales GST math (qty × cost − discount + tax).
+ * Receipt status is derived from received vs ordered quantity.
+ * An order can be cancelled only if no units have been received.
+ */
 import {
   calculateSaleLineTotal,
   calculateSaleTotals,

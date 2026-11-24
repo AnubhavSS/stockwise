@@ -1,3 +1,10 @@
+/**
+ * Sales documents.
+ *
+ * Only `completed` sales count as revenue and deduct stock.
+ * Drafts can be edited; cancelled sales restore inventory if it was applied.
+ * `inventoryApplied` prevents double-deducting when completing a sale twice.
+ */
 export type SaleStatus = "draft" | "completed" | "cancelled";
 export type PaymentStatus = "unpaid" | "partial" | "paid";
 export type PaymentMethod = "cash" | "upi" | "card" | "bank_transfer";

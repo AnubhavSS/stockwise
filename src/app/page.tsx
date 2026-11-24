@@ -1,3 +1,4 @@
+/** App entry: send operators to the dashboard. */
 import Link from "next/link";
 
 export default function HomePage() {

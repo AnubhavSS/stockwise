@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Purchase module: filters, summary, chart, and PO table from the purchase store.
+ */
 import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
@@ -75,6 +78,7 @@ export function PurchaseWorkspace() {
 
   return (
     <div className="space-y-6">
+      {/* Title, CSV export, create purchase order */}
       <PurchasePageHeader
         onExport={() => {
           exportPurchasesCsv(filtered, suppliers);
@@ -82,8 +86,11 @@ export function PurchaseWorkspace() {
         }}
         onCreate={() => setCreateOpen(true)}
       />
+      {/* Order value, received vs pending, outstanding supplier payments */}
       <PurchaseSummaryCards summary={summary} />
+      {/* Counted PO value over the selected period */}
       <PurchaseChart data={series} period={period} onPeriodChange={setPeriod} />
+      {/* Status tabs, filters, and the purchase-order table */}
       <section className="overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-1 ring-border">
         <div className="space-y-4 p-4">
           <PurchaseTabs
@@ -118,6 +125,7 @@ export function PurchaseWorkspace() {
         />
       </section>
 
+      {/* Create/edit, receive goods, and cancel — receive is the only stock-in path */}
       <CreatePurchaseSheet
         open={createOpen || Boolean(editPurchase)}
         purchase={editPurchase}

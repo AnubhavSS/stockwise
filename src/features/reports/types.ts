@@ -1,3 +1,4 @@
+/** View-model types for the Reports tabs, charts, and tables. */
 export type ReportTab =
   | "overview"
   | "sales"

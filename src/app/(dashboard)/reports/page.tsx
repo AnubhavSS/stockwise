@@ -1,3 +1,4 @@
+/** Reports & Analytics. Date range and tabs live in ReportsWorkspace. */
 import type { Metadata } from "next";
 
 import { ReportsWorkspace } from "@/components/reports/reports-workspace";

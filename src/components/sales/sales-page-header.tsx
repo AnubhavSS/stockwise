@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Sales title and create-invoice action.
+ */
 import { Download, Plus } from "lucide-react";
 
 import { PageHeader } from "@/components/shared/page-header";

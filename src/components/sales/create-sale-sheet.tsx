@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Create or edit a draft, or complete immediately (which deducts stock).
+ */
 import { useMemo, useState } from "react";
 import { Plus, Trash2, UserPlus } from "lucide-react";
 import { toast } from "sonner";

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Product list with quantity, value, and status; actions to adjust or edit.
+ */
 import { useRouter } from "next/navigation";
 import {
   MoreHorizontal,
@@ -96,6 +99,7 @@ export function StockTable({
 
   return (
     <div>
+      {/* Live catalogue: qty, reorder point, status, and row actions */}
       <Table>
         <TableHeader className="sticky top-0 z-10 bg-card">
           <TableRow className="hover:bg-transparent">

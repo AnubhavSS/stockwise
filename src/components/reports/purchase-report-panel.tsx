@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Purchase analysis: order vs received, supplier spend, and PO table.
+ */
 import { ClipboardList, PackageCheck, PackageSearch, ShoppingBag, Wallet } from "lucide-react";
 
 import { PurchaseTrendChart } from "@/components/reports/purchase-trend-chart";
@@ -91,6 +94,7 @@ export function PurchaseReportPanel({
 
   return (
     <div className="space-y-6">
+      {/* Order value vs goods received — drafts and cancellations are excluded */}
       <ReportKpiCards
         cards={[
           {
@@ -136,6 +140,7 @@ export function PurchaseReportPanel({
 
       <PurchaseTrendChart data={series} />
 
+      {/* Spend, receipts, and outstanding by supplier */}
       <Card className="border-border bg-card shadow-sm ring-1 ring-border">
         <CardHeader>
           <CardTitle>Supplier Analysis</CardTitle>
@@ -173,6 +178,7 @@ export function PurchaseReportPanel({
         </CardContent>
       </Card>
 
+      {/* Purchase orders in range after search and status filters */}
       <section className="overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-1 ring-border">
         <div className="flex flex-col gap-3 p-4 lg:flex-row lg:items-center">
           <SearchInput

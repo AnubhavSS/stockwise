@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Sales module: filters, summary, chart, and invoice table from the sales store.
+ */
 import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
@@ -67,6 +70,7 @@ export function SalesWorkspace() {
 
   return (
     <div className="space-y-6">
+      {/* Title, CSV export, create invoice */}
       <SalesPageHeader
         onExport={() => {
           exportSalesCsv(filtered, customers);
@@ -74,8 +78,11 @@ export function SalesWorkspace() {
         }}
         onCreate={() => setCreateOpen(true)}
       />
+      {/* Period KPIs: revenue, orders, AOV, pending payments */}
       <SalesSummaryCards summary={summary} />
+      {/* Completed-sales trend for the selected period */}
       <SalesChart data={series} period={period} onPeriodChange={setPeriod} />
+      {/* Tabs + search/filters sit above the paginated invoice table */}
       <section className="overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-1 ring-border">
         <div className="space-y-4 p-4">
           <SalesTabs
@@ -108,6 +115,7 @@ export function SalesWorkspace() {
         />
       </section>
 
+      {/* Create/edit sheet and cancel confirmation — not part of the page layout */}
       <CreateSaleSheet
         open={createOpen || Boolean(editSale)}
         sale={editSale}

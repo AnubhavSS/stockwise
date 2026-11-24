@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Donut of paid / partial / unpaid invoices (order counts, with amounts in the tooltip).
+ */
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 import { EmptyState } from "@/components/shared/empty-state";
@@ -28,6 +31,7 @@ export function PaymentDistributionChart({ slices }: PaymentDistributionChartPro
           />
         ) : (
           <>
+            {/* Slice size is invoice count, not rupees — amounts are in the tooltip */}
             <div className="relative h-[180px] w-[180px]">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>

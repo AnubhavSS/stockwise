@@ -1,3 +1,4 @@
+/** Add/edit product form parsing. SKU must be unique; cost price is optional. */
 import { skuExists } from "@/features/stock/selectors";
 import type { Product, ProductCategory } from "@/types/inventory";
 import { PRODUCT_CATEGORIES } from "@/types/inventory";

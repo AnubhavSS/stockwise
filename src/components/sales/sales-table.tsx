@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Paginated invoice list; row click opens the sale detail page.
+ */
 import { useRouter } from "next/navigation";
 import { Eye, MoreHorizontal, Pencil, Ban } from "lucide-react";
 
@@ -97,6 +100,7 @@ export function SalesTable({
 
   return (
     <div>
+      {/* One page of filtered invoices; click a row to open the sale */}
       <Table>
         <TableHeader className="sticky top-0 z-10 bg-card">
           <TableRow className="hover:bg-transparent">

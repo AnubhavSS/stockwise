@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * PO view with receive, edit, cancel, and print.
+ */
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -75,6 +78,7 @@ export function PurchaseDetails({ purchaseId }: PurchaseDetailsProps) {
 
   return (
     <div className="space-y-6">
+      {/* Screen chrome is hidden when printing the purchase order */}
       <div className="print:hidden">
         <Button
           variant="ghost"
@@ -135,6 +139,7 @@ export function PurchaseDetails({ purchaseId }: PurchaseDetailsProps) {
         />
       </div>
 
+      {/* Totals for the operator; receive/edit/cancel live in the header actions */}
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 print:hidden">
         {[
           { title: "Total Amount", value: formatCurrency(purchase.totalAmount) },

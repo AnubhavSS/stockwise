@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * New Sale, New Purchase, and Add Item. Links use Button with nativeButton=false.
+ */
 import { useState } from "react";
 import Link from "next/link";
 import { PackagePlus, ShoppingBag, ShoppingCart } from "lucide-react";
@@ -13,6 +16,7 @@ export function QuickActions() {
   return (
     <>
       <div className="flex flex-wrap gap-2">
+        {/* Sale and purchase open the create sheets via query params */}
         <Button
           variant="outline"
           className="bg-card"

@@ -1,3 +1,4 @@
+/* Stockwise theme: navy sidebar, light canvas, orange primary. Tokens feed Tailwind and shadcn. */
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Business summary: revenue, purchases, gross profit, inventory, charts, top products, activity.
+ */
 import {
   Boxes,
   ShoppingBag,
@@ -55,6 +58,7 @@ export function OverviewReport({
 }: OverviewReportProps) {
   return (
     <div className="space-y-6">
+      {/* Revenue, purchase orders, gross profit (not spend), live inventory value */}
       <ReportKpiCards
         cards={[
           {
@@ -95,6 +99,7 @@ export function OverviewReport({
         ]}
       />
 
+      {/* Time series of sales vs purchases, plus current stock mix */}
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <div className="xl:col-span-2">
           <SalesPurchaseChart data={series} />
@@ -102,8 +107,10 @@ export function OverviewReport({
         <StockStatusChart slices={stockSlices} totalItems={totalProducts} />
       </div>
 
+      {/* Bars = revenue, line = completed order count */}
       <SalesPerformanceChart data={series} />
 
+      {/* Ranked products from completed sales + recent ledger activity */}
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <Card className="border-border bg-card shadow-sm ring-1 ring-border xl:col-span-2">
           <CardHeader>

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Reports title, date-range presets (including custom), and CSV / print export.
+ */
 import { CalendarRange, Download, Printer } from "lucide-react";
 
 import { DateRangeFilter } from "@/components/shared/date-range-filter";
@@ -46,6 +49,7 @@ export function ReportsPageHeader({
       description="Track business performance and make data-driven decisions."
       action={
         <div className="flex flex-col items-stretch gap-2 sm:items-end">
+          {/* Presets drive every time-based KPI/chart; custom shows from/to below */}
           <div className="flex flex-wrap justify-end gap-2 print:hidden">
             <Select
               value={range.preset}
@@ -83,6 +87,7 @@ export function ReportsPageHeader({
                 <Download />
                 Export Report
               </DropdownMenuTrigger>
+              {/* CSV uses the active tab’s filtered rows; print uses the browser dialog */}
               <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={onExportCsv}>
                   <Download />
@@ -96,6 +101,7 @@ export function ReportsPageHeader({
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
+          {/* From / to inputs only when Custom Range is selected */}
           {range.preset === "custom" ? (
             <DateRangeFilter
               value={{ from: range.from, to: range.to }}

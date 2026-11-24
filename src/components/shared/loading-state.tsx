@@ -1,3 +1,7 @@
+/**
+ * Skeleton placeholder while a client workspace hydrates.
+ */
+
 import { Skeleton } from "@/components/ui/skeleton";
 
 type LoadingStateProps = {

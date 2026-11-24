@@ -1,3 +1,4 @@
+/** Product catalogue, quantities, and stock actions. */
 import type { Metadata } from "next";
 
 import { StockWorkspace } from "@/components/stock/stock-workspace";

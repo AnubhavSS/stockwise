@@ -1,3 +1,11 @@
+/**
+ * Report business rules.
+ *
+ * Revenue = completed sales only.
+ * Purchase value = ordered / partially received / received (never draft or cancelled).
+ * Gross profit = revenue − COGS, not revenue − purchase spend.
+ * If a product has no costPrice, COGS uses 62% of selling price and is flagged estimated.
+ */
 import type { Product } from "@/types/inventory";
 import type { Purchase } from "@/types/purchase";
 import type { Sale } from "@/types/sales";
@@ -16,6 +24,7 @@ export function isCompletedSale(sale: Sale): boolean {
   return sale.status === "completed";
 }
 
+/** Unit cost for inventory value and COGS. Missing cost is an explicit estimate. */
 export function productUnitCost(product: Pick<Product, "unitPrice" | "costPrice">): {
   cost: number;
   estimated: boolean;

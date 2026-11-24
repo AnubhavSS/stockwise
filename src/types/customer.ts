@@ -1,3 +1,7 @@
+/**
+ * Customer directory. `outstandingBalance` is derived from unpaid completed
+ * sales, not entered by hand.
+ */
 export type CustomerStatus = "active" | "inactive";
 
 export type Customer = {

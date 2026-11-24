@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Search, payment filters, and CSV export for the invoice table.
+ */
 import { DateRangeFilter } from "@/components/shared/date-range-filter";
 import { SearchInput } from "@/components/shared/search-input";
 import { Button } from "@/components/ui/button";

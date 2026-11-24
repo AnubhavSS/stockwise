@@ -1,3 +1,10 @@
+/**
+ * Sales invoices and customers.
+ *
+ * Completing a sale deducts stock through the inventory store.
+ * Cancelling a completed sale puts that stock back. Drafts never touch inventory.
+ * Customer outstanding balance is recalculated from unpaid completed invoices.
+ */
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -64,6 +71,7 @@ function refreshOutstanding(customers: Customer[], sales: Sale[]): Customer[] {
   }));
 }
 
+/** Deducts stock for a completed sale, or restores it when `reverse` is true. */
 function applyInventoryForSale(sale: Sale, reverse: boolean) {
   const movements = sale.items.map((item) => ({
     productId: item.productId,
@@ -241,6 +249,7 @@ export const useSalesStore = create<SalesState>()(
     {
       name: STORAGE_KEYS.sales,
       storage: createJSONStorage(() => zustandStorage),
+      // Rehydrate in AppProviders after mount so SSR HTML does not include stale localStorage.
       skipHydration: true,
       partialize: (state) => ({
         sales: state.sales,

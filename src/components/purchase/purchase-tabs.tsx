@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * All / Ordered / Partially received / Received / Cancelled.
+ */
 import type { PurchaseTab } from "@/features/purchase/selectors";
 import { formatNumber } from "@/lib/calculations";
 import { cn } from "@/lib/utils";

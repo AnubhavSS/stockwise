@@ -1,3 +1,9 @@
+/**
+ * Pure stock-ledger helpers. Stores call these so quantity never goes below
+ * zero and every change is recorded as a StockMovement.
+ *
+ * Sales subtract quantity; purchases add it; adjustments can add, remove, or set.
+ */
 import { calculateLineTotal } from "@/lib/calculations";
 import type {
   Product,
@@ -44,6 +50,7 @@ export function createStockMovement(input: {
   };
 }
 
+/** Turns an add / remove / set action into the next quantity and signed delta. */
 export function computeAdjustment(
   currentQuantity: number,
   type: StockAdjustmentType,
@@ -87,6 +94,7 @@ export function computeAdjustment(
   };
 }
 
+/** Applies one movement to a product list. Returns an error instead of negative stock. */
 export function applyStockMovement({
   products,
   movement,
@@ -138,6 +146,7 @@ export function applyStockMovement({
   };
 }
 
+/** Applies several movements in order. Stops on the first failure so nothing is half-applied. */
 export function applyStockMovementBatch({
   products,
   movements,
@@ -177,6 +186,11 @@ export function lineAmount(quantity: number, unitPrice: number): number {
   return calculateLineTotal(quantity, unitPrice);
 }
 
+/**
+ * Working-backwards balances for history tables.
+ * Start from today's quantity and undo each movement from newest to oldest
+ * so each row can show "stock after this event".
+ */
 export function deriveMovementBalances(
   movements: StockMovement[],
   currentQuantity: number,

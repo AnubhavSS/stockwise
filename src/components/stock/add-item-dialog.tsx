@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Create a product. Opening quantity is written as an adjustment movement.
+ */
 import { useState } from "react";
 import { toast } from "sonner";
 

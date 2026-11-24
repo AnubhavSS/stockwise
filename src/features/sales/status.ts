@@ -1,3 +1,4 @@
+/** Human labels and badge colors for sale and payment status. */
 import type { StatusTone } from "@/types/common";
 import type { PaymentMethod, PaymentStatus, SaleStatus } from "@/types/sales";
 

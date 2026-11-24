@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Delete unused products, or archive items that already have movement history.
+ */
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";

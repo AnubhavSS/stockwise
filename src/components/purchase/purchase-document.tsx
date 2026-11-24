@@ -1,3 +1,7 @@
+/**
+ * Printable purchase order.
+ */
+
 import { siteConfig } from "@/config/site";
 import { orderedQuantity, remainingQuantity } from "@/features/purchase/calculations";
 import { supplierName } from "@/features/purchase/selectors";
@@ -29,6 +33,7 @@ export function PurchaseDocument({
       id="purchase-order"
       className="rounded-xl border border-border bg-card p-6 text-sm shadow-sm print:border-0 print:shadow-none"
     >
+      {/* Printable header: company on the left, PO number on the right */}
       <header className="flex flex-col justify-between gap-4 border-b border-border pb-4 sm:flex-row">
         <div>
           <p className="text-lg font-semibold">{siteConfig.name}</p>
@@ -41,6 +46,7 @@ export function PurchaseDocument({
         </div>
       </header>
 
+      {/* Supplier, expected date, and payment summary */}
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
           <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">

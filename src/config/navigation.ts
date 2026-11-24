@@ -1,3 +1,7 @@
+/**
+ * Sidebar links. `primaryNav` is the operating modules; `secondaryNav` is
+ * the directory (Customers / Suppliers).
+ */
 import {
   BarChart3,
   LayoutDashboard,

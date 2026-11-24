@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Movements for one SKU with running balance.
+ */
 import { StockHistoryTable } from "@/components/stock/stock-history-table";
 import { deriveMovementBalances } from "@/lib/stock-transactions";
 import type { Product, StockMovement } from "@/types/inventory";

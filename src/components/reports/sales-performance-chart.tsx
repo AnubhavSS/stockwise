@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Bars for revenue and a line for completed order count over the selected range.
+ */
 import {
   Bar,
   CartesianGrid,
@@ -37,6 +40,7 @@ export function SalesPerformanceChart({ data }: SalesPerformanceChartProps) {
             description="Completed invoices will appear here once sales are recorded."
           />
         ) : (
+          /* Orange bars = revenue, navy line = number of completed orders */
           <div className="h-[280px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>

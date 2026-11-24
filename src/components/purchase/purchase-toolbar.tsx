@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Search, supplier and status filters, and CSV export.
+ */
 import { DateRangeFilter } from "@/components/shared/date-range-filter";
 import { SearchInput } from "@/components/shared/search-input";
 import { Button } from "@/components/ui/button";

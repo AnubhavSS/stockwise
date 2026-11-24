@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Inventory value by category using qty × unit cost (estimated cost when missing).
+ */
 import {
   Bar,
   BarChart,
@@ -32,6 +35,7 @@ export function CategoryValueChart({ data }: CategoryValueChartProps) {
         {data.length === 0 ? (
           <EmptyState title="No inventory to value" description="Add products to see category value." />
         ) : (
+          /* One bar per category: on-hand qty × unit cost */
           <div className="h-[280px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>

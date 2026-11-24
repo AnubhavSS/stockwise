@@ -1,3 +1,4 @@
+/** Product detail: quantities, movements, and adjust/edit actions. */
 import type { Metadata } from "next";
 import { Suspense } from "react";
 

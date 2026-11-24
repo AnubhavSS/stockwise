@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Cancel an order that has not received any goods.
+ */
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";

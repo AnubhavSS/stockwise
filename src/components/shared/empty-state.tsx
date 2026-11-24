@@ -1,3 +1,7 @@
+/**
+ * Friendly empty copy when a table or chart has no rows.
+ */
+
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 

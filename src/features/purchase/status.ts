@@ -1,3 +1,4 @@
+/** Purchase order status labels and badge colors. */
 import {
   paymentMethodLabel,
   paymentStatusLabel,

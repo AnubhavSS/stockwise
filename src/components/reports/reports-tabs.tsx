@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * In-page tabs: Overview, Sales, Purchase, Stock, Stock Movement.
+ */
 import { cn } from "@/lib/utils";
 import type { ReportTab } from "@/features/reports/types";
 
@@ -23,6 +26,7 @@ export function ReportsTabs({ value, onValueChange }: ReportsTabsProps) {
       aria-label="Report categories"
       className="flex gap-1 overflow-x-auto border-b border-border print:hidden"
     >
+      {/* Underline on the active tab; print hides this chrome */}
       {TABS.map((tab) => {
         const selected = tab.id === value;
         return (

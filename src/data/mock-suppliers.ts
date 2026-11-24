@@ -1,3 +1,4 @@
+/** Seed suppliers referenced by mock purchase orders. */
 import type { Supplier } from "@/types/supplier";
 
 export const mockSuppliers: Supplier[] = [

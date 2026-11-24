@@ -1,3 +1,8 @@
+/**
+ * Persistence helpers. Zustand writes through `zustandStorage`, which uses
+ * localStorage in the browser and an in-memory Map during SSR or when
+ * storage is blocked (private mode / quota).
+ */
 import type { StateStorage } from "zustand/middleware";
 
 const memoryStore = new Map<string, string>();

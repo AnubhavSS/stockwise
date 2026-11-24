@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Shared pager for catalogue and history tables.
+ */
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";

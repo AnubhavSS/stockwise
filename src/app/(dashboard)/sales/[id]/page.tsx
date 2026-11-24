@@ -1,3 +1,4 @@
+/** Single sale: invoice, payment, and cancel/complete actions. */
 import type { Metadata } from "next";
 import { Suspense } from "react";
 

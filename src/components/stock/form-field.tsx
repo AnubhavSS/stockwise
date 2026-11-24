@@ -1,3 +1,7 @@
+/**
+ * Label + control + error text for stock forms.
+ */
+
 import type { ReactNode } from "react";
 
 import { Label } from "@/components/ui/label";

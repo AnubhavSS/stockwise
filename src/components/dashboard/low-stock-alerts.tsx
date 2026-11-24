@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Products at or below reorder point, ranked so the demo SKUs stay visible.
+ */
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AlertTriangle, ChevronRight } from "lucide-react";
@@ -34,6 +37,7 @@ export function LowStockAlerts({ alerts }: LowStockAlertsProps) {
         </Link>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-2">
+        {/* Out of stock uses red; still-in-stock-but-low uses amber. Click opens the product. */}
         {alerts.length === 0 ? (
           <EmptyState
             title="All stocked up"

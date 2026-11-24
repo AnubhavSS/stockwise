@@ -1,3 +1,7 @@
+/**
+ * Coming-soon layout for Customers and Suppliers directory pages.
+ */
+
 import { PageHeader } from "@/components/shared/page-header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 

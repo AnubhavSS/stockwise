@@ -1,3 +1,7 @@
+/**
+ * KPI card with optional trend vs the previous period.
+ */
+
 import type { LucideIcon } from "lucide-react";
 
 import {
@@ -26,6 +30,7 @@ export function StatCard({
 }: StatCardProps) {
   return (
     <Card className={cn("border-border bg-card shadow-sm", className)}>
+      {/* Label, big number, optional icon and hint */}
       <CardHeader className="flex flex-row items-start justify-between space-y-0">
         <div>
           <CardDescription>{title}</CardDescription>

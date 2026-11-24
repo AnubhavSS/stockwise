@@ -1,9 +1,17 @@
+/**
+ * Shared formatting and inventory math used by Dashboard, Stock, Sales,
+ * Purchase, and Reports.
+ *
+ * Currency uses the Indian grouping style (₹1,25,000). Dates are formatted
+ * in UTC so server HTML and the browser show the same strings.
+ */
 import { APP_NOW_ISO } from "@/lib/constants";
 import type { PaginatedResult } from "@/types/common";
 import type { Product } from "@/types/inventory";
 import type { Purchase } from "@/types/purchase";
 import type { Sale } from "@/types/sales";
 
+/** Groups digits as 12,34,567 (Indian lakhs/crores) instead of 1,234,567. */
 function formatIndianNumber(value: number): string {
   const sign = value < 0 ? "-" : "";
   const digits = Math.round(Math.abs(value)).toString();
@@ -28,6 +36,7 @@ function formatIndianNumber(value: number): string {
   return `${sign}${groups.join(",")},${lastThree}`;
 }
 
+/** Rupee display for tables, KPIs, and chart tooltips. */
 export function formatCurrency(amount: number): string {
   return `₹${formatIndianNumber(amount)}`;
 }
@@ -71,6 +80,7 @@ export function formatPercent(value: number): string {
   return `${sign}${rounded}%`;
 }
 
+/** Human relative time against the demo clock, e.g. "18 minutes ago". */
 export function formatRelativeTime(
   isoDate: string,
   now = new Date(APP_NOW_ISO),
@@ -96,6 +106,7 @@ export function calculateLineTotal(quantity: number, unitPrice: number): number 
   return quantity * unitPrice;
 }
 
+/** Retail value of on-hand stock (qty × selling price), not cost. */
 export function calculateStockValue(
   product: Pick<Product, "quantity" | "unitPrice">,
 ): number {
@@ -117,6 +128,7 @@ export function getTotalUnits(products: Product[]): number {
   return products.reduce((sum, product) => sum + product.quantity, 0);
 }
 
+/** Low stock plus out of stock — items that need replenishment. */
 export function getAttentionProducts(products: Product[]): Product[] {
   return products.filter(
     (product) => product.quantity <= product.minimumStockLevel,
@@ -139,6 +151,10 @@ export function getInStockProducts(products: Product[]): Product[] {
   );
 }
 
+/**
+ * Period-over-period change. If the previous period was zero, treat any
+ * positive current value as +100% rather than dividing by zero.
+ */
 export function percentChange(current: number, previous: number): number {
   if (previous === 0) {
     return current === 0 ? 0 : 100;
@@ -178,6 +194,7 @@ export function sumPurchaseTotals(purchases: Purchase[]): number {
   return purchases.reduce((total, purchase) => total + purchase.totalAmount, 0);
 }
 
+/** Date used on the dashboard chart: received date if present, else order date. */
 export function purchaseActivityDate(purchase: Purchase): string {
   return purchase.receivedDate ?? purchase.date ?? purchase.expectedDate;
 }

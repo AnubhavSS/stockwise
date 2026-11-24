@@ -1,3 +1,7 @@
+/**
+ * Shared UI and dashboard shapes: date ranges, pagination, KPI stats,
+ * chart points, and the activity feed shown on Dashboard / Reports.
+ */
 export type CurrencyCode = "INR";
 
 export type StatusTone = "neutral" | "info" | "success" | "warning" | "danger";

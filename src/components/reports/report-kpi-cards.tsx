@@ -1,3 +1,7 @@
+/**
+ * Reusable KPI row used by every report tab.
+ */
+
 import type { LucideIcon } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
@@ -24,6 +28,7 @@ export function ReportKpiCards({
 }: ReportKpiCardsProps) {
   return (
     <section className={cn("grid gap-4", columns)}>
+      {/* Value, optional % vs previous period, and a one-line definition */}
       {cards.map((card) => {
         const Icon = card.icon;
         const positive = (card.trend ?? 0) >= 0;

@@ -1,3 +1,6 @@
+/**
+ * Stock health: In Stock (above reorder point), Low Stock (1…min), Out of Stock (0).
+ */
 import type { Product, StockStatus } from "@/types/inventory";
 import type { StatusTone } from "@/types/common";
 

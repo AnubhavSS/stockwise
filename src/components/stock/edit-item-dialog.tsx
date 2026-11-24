@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Update catalogue fields. Quantity is not edited here — use Adjust Stock.
+ */
 import { useState } from "react";
 import { toast } from "sonner";
 

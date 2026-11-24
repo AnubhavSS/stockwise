@@ -1,3 +1,7 @@
+/**
+ * In / Low / Out badge from current qty vs reorder point.
+ */
+
 import { StatusBadge } from "@/components/shared/status-badge";
 import {
   getStockStatus,

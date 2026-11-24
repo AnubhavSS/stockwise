@@ -1,3 +1,7 @@
+/**
+ * CSV export for the active Reports tab. Rows already include search/filter
+ * results from the UI; this file only formats and downloads them.
+ */
 import { orderedQuantity, receivedQuantity } from "@/features/purchase/calculations";
 import { supplierName } from "@/features/purchase/selectors";
 import { paymentStatusLabel, purchaseStatusLabel } from "@/features/purchase/status";

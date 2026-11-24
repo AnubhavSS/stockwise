@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Line/area chart of completed sales vs counted purchase value over the period.
+ */
 import {
   Area,
   AreaChart,
@@ -30,6 +33,7 @@ export function SalesPurchaseChart({ data }: SalesPurchaseChartProps) {
         <div className="h-[280px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+              {/* Orange = completed sales, navy = counted purchase orders */}
               <defs>
                 <linearGradient id="salesFill" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#F28C28" stopOpacity={0.18} />

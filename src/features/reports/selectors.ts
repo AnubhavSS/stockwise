@@ -1,3 +1,8 @@
+/**
+ * Report selectors: turn store data into KPIs, series, and table rows.
+ * Inventory value and stock status are always the live warehouse snapshot —
+ * they do not rewind to the selected date range.
+ */
 import { deriveStockStatus } from "@/features/dashboard/selectors";
 import {
   inventoryValueAtCost,
@@ -41,6 +46,7 @@ import type { PaymentStatus, Sale, SaleStatus } from "@/types/sales";
 import type { Customer } from "@/types/customer";
 import type { Supplier } from "@/types/supplier";
 
+/** Completed invoices in the selected range, or the matching previous period. */
 export function completedSalesInRange(
   sales: Sale[],
   range: AnalyticsRange,
@@ -54,6 +60,7 @@ export function completedSalesInRange(
   );
 }
 
+/** Non-draft, non-cancelled purchase orders in the selected (or previous) range. */
 export function countedPurchasesInRange(
   purchases: Purchase[],
   range: AnalyticsRange,
@@ -68,6 +75,10 @@ export function countedPurchasesInRange(
   );
 }
 
+/**
+ * Overview KPIs. Gross profit is revenue minus COGS, not minus purchase spend.
+ * Inventory value is today's warehouse snapshot and ignores the date range.
+ */
 export function deriveOverviewKpis(input: {
   products: Product[];
   sales: Sale[];
@@ -157,6 +168,7 @@ function enumerateBuckets(start: Date, end: Date, monthly: boolean): string[] {
   return keys;
 }
 
+/** Daily or monthly buckets of completed sales vs counted purchase value. */
 export function derivePerformanceSeries(input: {
   sales: Sale[];
   purchases: Purchase[];
@@ -189,6 +201,7 @@ export function derivePerformanceSeries(input: {
   }));
 }
 
+/** Rank products by units sold on completed invoices in the range. */
 export function deriveTopProducts(input: {
   sales: Sale[];
   products: Product[];
@@ -225,6 +238,7 @@ export function deriveTopProducts(input: {
     .slice(0, input.limit ?? 8);
 }
 
+/** Sales tab totals: revenue, orders, AOV, units, and unpaid completed invoices. */
 export function deriveSalesReport(input: {
   sales: Sale[];
   products: Product[];
@@ -275,6 +289,7 @@ export function deriveSalesReport(input: {
   };
 }
 
+/** Purchase tab totals: order value vs received vs still pending. */
 export function derivePurchaseReport(input: {
   purchases: Purchase[];
   range: AnalyticsRange;
@@ -304,6 +319,7 @@ export function derivePurchaseReport(input: {
   };
 }
 
+/** Spend, receipt, and outstanding payment grouped by supplier. */
 export function deriveSupplierRows(
   purchases: Purchase[],
   suppliers: Supplier[],
@@ -337,6 +353,7 @@ export function deriveSupplierRows(
   return [...bySupplier.values()].sort((left, right) => right.totalValue - left.totalValue);
 }
 
+/** Current catalogue snapshot — not historical stock at the selected date. */
 export function deriveStockReport(products: Product[]) {
   const catalog = getCatalogProducts(products);
   const inventory = inventoryValueAtCost(catalog);
@@ -367,6 +384,7 @@ export function deriveStockReport(products: Product[]) {
   };
 }
 
+/** Maps ledger type + sign to report labels (adjustment in vs out). */
 export function movementKind(movement: StockMovement): MovementKind {
   if (movement.type === "purchase") {
     return "purchase";
@@ -384,6 +402,7 @@ export const movementKindLabel: Record<MovementKind, string> = {
   adjustment_out: "Adjustment Out",
 };
 
+/** Stock in/out totals for the selected range, using real movement records only. */
 export function deriveMovementSummary(
   movements: StockMovement[],
   range: AnalyticsRange,
@@ -414,6 +433,7 @@ export function deriveMovementSummary(
   };
 }
 
+/** Sales table rows after search, status, and date-range filters. */
 export function filterReportSales(
   sales: Sale[],
   customers: Customer[],
@@ -447,6 +467,7 @@ export function filterReportSales(
   });
 }
 
+/** Purchase table rows after search, status, and date-range filters. */
 export function filterReportPurchases(
   purchases: Purchase[],
   suppliers: Supplier[],
@@ -475,6 +496,7 @@ export function filterReportPurchases(
   });
 }
 
+/** Stock table rows (current snapshot) after search, category, and status filters. */
 export function filterReportStock(
   products: Product[],
   filters: {
@@ -503,6 +525,7 @@ export function filterReportStock(
   });
 }
 
+/** Movement history after date, product, type, and reference filters. Deduped by id. */
 export function filterReportMovements(
   movements: StockMovement[],
   products: Product[],
@@ -549,6 +572,7 @@ export function filterReportMovements(
   });
 }
 
+/** Recent business activity for the Overview tab, limited to eight rows. */
 export function activitiesInRange(activities: Activity[], range: AnalyticsRange): Activity[] {
   const { start, end } = getAnalyticsBounds(range);
   return activities

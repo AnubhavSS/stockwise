@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Sales revenue trend for completed invoices.
+ */
 import {
   Area,
   AreaChart,
@@ -41,6 +44,7 @@ export function SalesChart({ data, period, onPeriodChange }: SalesChartProps) {
           <CardTitle>Sales Analytics</CardTitle>
           <CardDescription>Revenue trend for completed sales.</CardDescription>
         </div>
+        {/* Chart window is independent of the table filters below */}
         <Select
           value={period}
           onValueChange={(value) => {

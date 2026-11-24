@@ -1,3 +1,8 @@
+/**
+ * Dashboard date windows: last 7, 30, or 90 days ending at APP_NOW.
+ * Also returns the matching previous window for KPI % change.
+ * Reports uses a wider preset list in `range.ts`; do not mix the two types.
+ */
 import { APP_NOW_ISO } from "@/lib/constants";
 
 export type ReportPeriod = "7d" | "30d" | "90d";

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * App chrome: sticky navy sidebar, header, and a mobile sheet. Sidebar and header are hidden when printing reports or invoices.
+ */
 import type { ReactNode } from "react";
 
 import { AppHeader } from "@/components/layout/app-header";
@@ -20,6 +23,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   return (
     <div className="flex min-h-screen bg-background">
+      {/* Desktop navy sidebar — hidden when printing invoices/reports */}
       <div
         className={cn(
           "sticky top-0 hidden h-screen shrink-0 transition-[width] duration-200 print:hidden lg:block",
@@ -28,6 +32,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       >
         <AppSidebar className="h-screen border-r border-sidebar-border" />
       </div>
+      {/* Phone/tablet drawer with the same nav, forced expanded */}
       <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
         <SheetContent
           side="left"
@@ -45,6 +50,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         <div className="print:hidden">
           <AppHeader />
         </div>
+        {/* Module pages (dashboard, sales, stock, …) render here */}
         <main className="flex-1">
           <PageContainer>{children}</PageContainer>
         </main>

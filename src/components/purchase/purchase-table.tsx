@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Paginated purchase orders; creating a PO does not add stock.
+ */
 import { useRouter } from "next/navigation";
 import { Ban, Eye, MoreHorizontal, PackageCheck, Pencil } from "lucide-react";
 
@@ -104,6 +107,7 @@ export function PurchaseTable({
 
   return (
     <div>
+      {/* One page of purchase orders; creating a PO does not add stock */}
       <Table>
         <TableHeader className="sticky top-0 z-10 bg-card">
           <TableRow className="hover:bg-transparent">

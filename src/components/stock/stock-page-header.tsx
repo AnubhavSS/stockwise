@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Stock title plus history, import placeholder, and add item.
+ */
 import Link from "next/link";
 import { History, Plus, Upload } from "lucide-react";
 import { toast } from "sonner";

@@ -1,3 +1,7 @@
+/**
+ * Seed catalogue. Loaded into the inventory store on first visit, then
+ * persisted in localStorage. Quantities are the opening warehouse snapshot.
+ */
 import type { Product, ProductCategory } from "@/types/inventory";
 
 type ProductSeed = Omit<Product, "description" | "costPrice" | "isActive">;

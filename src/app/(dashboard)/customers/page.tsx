@@ -1,3 +1,4 @@
+/** Customer directory placeholder — customers are already used on sales invoices. */
 import type { Metadata } from "next";
 
 import { ModulePlaceholder } from "@/components/shared/module-placeholder";

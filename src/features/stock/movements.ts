@@ -1,3 +1,4 @@
+/** Labels for the stock history table (Purchase / Sale / Adjustment). */
 import type { StockMovementType } from "@/types/inventory";
 
 export function getMovementTypeLabel(type: StockMovementType): string {

@@ -1,3 +1,7 @@
+/**
+ * Revenue, orders, AOV, and pending payments for the selected sales period.
+ */
+
 import {
   Banknote,
   Receipt,
@@ -50,6 +54,7 @@ export function SalesSummaryCards({ summary }: SalesSummaryCardsProps) {
 
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {/* Completed sales only — cancelled invoices are not in these numbers */}
       {cards.map((card) => {
         const Icon = card.icon;
         const positive = (card.trend ?? 0) >= 0;

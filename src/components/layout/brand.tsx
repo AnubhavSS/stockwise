@@ -1,3 +1,7 @@
+/**
+ * Stockwise mark and product name used in the sidebar header.
+ */
+
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 
@@ -7,8 +11,9 @@ type BrandProps = {
 
 export function Brand({ compact = false }: BrandProps) {
   return (
-    <div className="flex items-center gap-3">
-      <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
+    <div className="flex min-w-0 items-center gap-3">
+      {/* Orange cube mark; wordmark is screen-reader-only when the sidebar is collapsed */}
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
         <svg
           viewBox="0 0 24 24"
           className="size-5"
@@ -23,8 +28,8 @@ export function Brand({ compact = false }: BrandProps) {
           <path d="M12 12.5 20 8.5M12 12.5V22M12 12.5 4 8.5" stroke="currentColor" strokeWidth="1.6" />
         </svg>
       </span>
-      <span className={cn("min-w-0", compact && "sr-only")}>
-        <span className="block text-sm font-semibold tracking-tight">
+      <span className={cn("min-w-0 overflow-hidden", compact && "sr-only")}>
+        <span className="block truncate text-sm font-semibold tracking-tight">
           {siteConfig.name}
         </span>
         <span className="block truncate text-[11px] text-sidebar-foreground/70">

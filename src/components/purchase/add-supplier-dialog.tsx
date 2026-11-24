@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Add a supplier without leaving the purchase form.
+ */
 import { useState } from "react";
 import { toast } from "sonner";
 

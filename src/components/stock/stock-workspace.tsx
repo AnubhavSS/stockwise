@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Stock catalogue: summary, filters, table, and add/edit/adjust dialogs.
+ */
 import { useMemo, useState } from "react";
 
 import { LoadingState } from "@/components/shared/loading-state";
@@ -60,8 +63,11 @@ export function StockWorkspace() {
 
   return (
     <div className="space-y-6">
+      {/* Title, stock history link, add item */}
       <StockPageHeader onAddItem={() => setAddOpen(true)} />
+      {/* Live In / Low / Out counts from the catalogue */}
       <StockSummaryCards summary={summary} />
+      {/* Tabs, search, and the product table */}
       <section className="overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-1 ring-border">
         <div className="space-y-4 p-4">
           <StockTabs
@@ -97,6 +103,7 @@ export function StockWorkspace() {
         </div>
       </section>
 
+      {/* Quantity changes go through Adjust Stock, not the edit form */}
       <AddItemDialog open={addOpen} onOpenChange={setAddOpen} />
       <EditItemDialog
         product={editProduct}

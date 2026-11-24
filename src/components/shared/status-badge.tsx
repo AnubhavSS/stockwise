@@ -1,3 +1,7 @@
+/**
+ * Colored status chip (success / warning / danger / info).
+ */
+
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { StatusTone } from "@/types/common";

@@ -1,3 +1,7 @@
+/**
+ * Seed activity feed and stock movements, timestamped relative to APP_NOW
+ * so "2 minutes ago" stays stable in the demo.
+ */
 import type { Activity } from "@/types/common";
 import type { StockMovement } from "@/types/inventory";
 

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Add a customer without leaving the sales form.
+ */
 import { useState } from "react";
 import { toast } from "sonner";
 

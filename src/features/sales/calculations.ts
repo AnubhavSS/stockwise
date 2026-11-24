@@ -1,3 +1,7 @@
+/**
+ * Invoice math: line totals, GST, and payment remaining.
+ * Choosing Paid forces amountPaid = total; Unpaid forces 0.
+ */
 import { calculateLineTotal } from "@/lib/calculations";
 import type { PaymentStatus, Sale, SaleItem } from "@/types/sales";
 

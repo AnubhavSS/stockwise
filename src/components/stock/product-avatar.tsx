@@ -1,3 +1,7 @@
+/**
+ * Initials tile used in product lists.
+ */
+
 import {
   Cable,
   HardDrive,

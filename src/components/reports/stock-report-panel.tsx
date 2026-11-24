@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Current warehouse snapshot: counts, value by category, and inventory table.
+ */
 import { AlertTriangle, Boxes, Layers3, Package, PackageX, Wallet } from "lucide-react";
 
 import { StockStatusChart } from "@/components/dashboard/stock-status-chart";
@@ -87,6 +90,7 @@ export function StockReportPanel({
 
   return (
     <div className="space-y-6">
+      {/* Live warehouse snapshot — not stock as-of the selected date */}
       <ReportKpiCards
         cards={[
           {
@@ -137,6 +141,7 @@ export function StockReportPanel({
         columns="grid-cols-1 sm:grid-cols-2 xl:grid-cols-3"
       />
 
+      {/* Mix by status and inventory value by category (qty × unit cost) */}
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <StockStatusChart slices={summary.slices} totalItems={summary.totalProducts} />
         <div className="xl:col-span-2">
@@ -144,6 +149,7 @@ export function StockReportPanel({
         </div>
       </div>
 
+      {/* Catalogue table: search, category, status, attention-only, sort */}
       <section className="overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-1 ring-border">
         <div className="flex flex-col gap-3 p-4 lg:flex-row lg:flex-wrap lg:items-center">
           <SearchInput

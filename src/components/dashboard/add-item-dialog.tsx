@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Quick-create product from the dashboard; opening qty is recorded as an adjustment.
+ */
 import { useState } from "react";
 import { toast } from "sonner";
 

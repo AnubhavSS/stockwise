@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Manual add, remove, or set quantity with a required reason.
+ */
 import { useState } from "react";
 import { toast } from "sonner";
 

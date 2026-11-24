@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Create a draft or send an order to a supplier. Stock is unchanged until receive.
+ */
 import { useMemo, useState } from "react";
 import { PackagePlus, Plus, Trash2, Truck } from "lucide-react";
 import { toast } from "sonner";

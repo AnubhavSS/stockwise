@@ -1,3 +1,4 @@
+/** Single purchase order: receive goods, payments, and cancel rules. */
 import type { Metadata } from "next";
 import { Suspense } from "react";
 

@@ -1,3 +1,9 @@
+/**
+ * Purchase orders and suppliers.
+ *
+ * Placing an order does not change stock. `receivePurchaseItems` is the
+ * only path that adds inventory. Orders with received goods cannot be cancelled.
+ */
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -216,6 +222,7 @@ export const usePurchaseStore = create<PurchaseState>()(
         }
 
         const now = new Date().toISOString();
+        // Stock increases only on this receive step, never when the PO is created.
         const inventory = useInventoryStore.getState().recordMovements(
           incoming.map((line) => ({
             productId: line.productId,
@@ -284,6 +291,7 @@ export const usePurchaseStore = create<PurchaseState>()(
     {
       name: STORAGE_KEYS.purchases,
       storage: createJSONStorage(() => zustandStorage),
+      // Rehydrate in AppProviders after mount so SSR HTML does not include stale localStorage.
       skipHydration: true,
       partialize: (state) => ({
         purchases: state.purchases,

@@ -1,3 +1,4 @@
+/** Download the currently filtered purchase table as CSV. */
 import { supplierName } from "@/features/purchase/selectors";
 import {
   paymentMethodLabel,

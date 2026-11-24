@@ -1,3 +1,7 @@
+/**
+ * Lightweight table wrapper used across modules.
+ */
+
 import type { ReactNode } from "react";
 
 import { EmptyState } from "@/components/shared/empty-state";

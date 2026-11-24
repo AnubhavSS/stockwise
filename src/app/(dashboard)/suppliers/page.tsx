@@ -1,3 +1,4 @@
+/** Supplier directory placeholder — suppliers are already used on purchase orders. */
 import type { Metadata } from "next";
 
 import { ModulePlaceholder } from "@/components/shared/module-placeholder";

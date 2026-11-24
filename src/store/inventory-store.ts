@@ -1,3 +1,11 @@
+/**
+ * Catalogue, stock movements, and the activity feed.
+ * Persisted to localStorage (`skipHydration` so SSR does not fight the client).
+ *
+ * Opening quantity is stored as an adjustment movement, not as a silent
+ * quantity write. Products with movement history are archived instead of
+ * deleted so reports keep a complete trail.
+ */
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -114,6 +122,7 @@ export const useInventoryStore = create<InventoryState>()(
           now,
         );
 
+        // Opening stock goes through the ledger so history stays accurate.
         if (input.quantity > 0) {
           const result = applyStockMovement({
             products,
@@ -207,6 +216,7 @@ export const useInventoryStore = create<InventoryState>()(
           return { error: "Product was not found." };
         }
 
+        // Keep products that already appear on the ledger; hide them instead of deleting.
         const hasHistory = get().stockMovements.some(
           (movement) => movement.productId === id,
         );
@@ -319,6 +329,7 @@ export const useInventoryStore = create<InventoryState>()(
     {
       name: STORAGE_KEYS.inventory,
       storage: createJSONStorage(() => zustandStorage),
+      // Rehydrate in AppProviders after mount so SSR HTML does not include stale localStorage.
       skipHydration: true,
       partialize: (state) => ({
         products: state.products,

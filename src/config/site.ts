@@ -1,3 +1,4 @@
+/** Branding, locale, and the demo operator shown in the header. */
 export const siteConfig = {
   name: "Stockwise",
   tagline: "Inventory clarity. Business control.",

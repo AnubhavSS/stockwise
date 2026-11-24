@@ -1,3 +1,7 @@
+/**
+ * Layout chrome: collapsed sidebar, mobile drawer, header search.
+ * Only `sidebarCollapsed` is persisted; `hasHydrated` is set after localStorage loads.
+ */
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -33,6 +37,7 @@ export const useUiStore = create<UiState>()(
     {
       name: STORAGE_KEYS.ui,
       storage: createJSONStorage(() => zustandStorage),
+      // Rehydrate in AppProviders after mount so SSR HTML does not include stale localStorage.
       skipHydration: true,
       partialize: (state) => ({
         sidebarCollapsed: state.sidebarCollapsed,

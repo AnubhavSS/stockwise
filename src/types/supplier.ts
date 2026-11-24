@@ -1,3 +1,4 @@
+/** Supplier directory used on purchase orders. */
 export type SupplierStatus = "active" | "inactive";
 
 export type Supplier = {

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Cancel a completed sale and restore deducted stock.
+ */
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";

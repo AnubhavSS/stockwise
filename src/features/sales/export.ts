@@ -1,3 +1,4 @@
+/** Download the currently filtered sales table as CSV. */
 import { customerName } from "@/features/sales/selectors";
 import {
   paymentMethodLabel,

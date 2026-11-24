@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Record goods in. Remaining qty is capped; this is the only path that increases stock.
+ */
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 

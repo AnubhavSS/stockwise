@@ -1,5 +1,11 @@
 "use client";
 
+/**
+ * Dashboard data hook. Pulls products, sales, purchases, and activities from
+ * the Zustand stores and derives KPIs, charts, alerts, and the activity list
+ * for the selected 7 / 30 / 90 day period.
+ */
+
 import { useMemo } from "react";
 
 import {
@@ -34,6 +40,7 @@ export function useDashboardData(period: ReportPeriod) {
   const stockStatus = useMemo(() => deriveStockStatus(products), [products]);
 
   const alerts = useMemo(() => {
+    // Keep the four demo SKUs from the original dashboard mock at the top of the list.
     const featured = ["WM-001", "UC-002", "LS-003", "HC-004"];
     return getStockAlerts(getActiveProducts(products))
       .sort((a, b) => {

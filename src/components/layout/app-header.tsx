@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Top bar: breadcrumbs, global search, notifications, and the demo operator menu.
+ */
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -106,6 +109,7 @@ export function AppHeader() {
 
   return (
     <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-border bg-background/90 px-4 backdrop-blur-sm sm:px-6">
+      {/* Hamburger only on small screens — opens the sidebar sheet */}
       <Button
         variant="ghost"
         size="icon"
@@ -115,6 +119,7 @@ export function AppHeader() {
       >
         <Menu className="size-4" />
       </Button>
+      {/* Where the operator currently is */}
       <Breadcrumb className="hidden min-w-0 md:block">
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -129,6 +134,7 @@ export function AppHeader() {
         </BreadcrumbList>
       </Breadcrumb>
       <div className="ml-auto flex min-w-0 flex-1 items-center justify-end gap-2 sm:gap-3">
+        {/* Products, invoices, and POs matching the typed query */}
         <div className="relative w-full max-w-xs">
           <SearchInput
             id="global-search"
@@ -171,6 +177,7 @@ export function AppHeader() {
             </div>
           ) : null}
         </div>
+        {/* Demo notification shortcuts into stock / sales / purchase */}
         <DropdownMenu>
           <DropdownMenuTrigger
             render={
@@ -194,6 +201,7 @@ export function AppHeader() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        {/* Demo operator — profile/sign-out are not wired in this build */}
         <DropdownMenu>
           <DropdownMenuTrigger
             render={<Button variant="ghost" size="icon" aria-label="Account" className="rounded-full" />}

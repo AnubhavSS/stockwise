@@ -1,3 +1,4 @@
+/** Sales (and purchase) period picker, including year-to-date. */
 import { APP_NOW_ISO } from "@/lib/constants";
 import {
   getPeriodBounds,

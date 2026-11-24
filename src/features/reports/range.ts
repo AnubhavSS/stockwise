@@ -1,3 +1,8 @@
+/**
+ * Reports & Analytics date range (Today, 7/30/90 days, This Year, Custom).
+ * All time-based KPIs and charts on /reports should go through these bounds.
+ * Ranges longer than 62 days are charted by month instead of by day.
+ */
 import { APP_NOW_ISO } from "@/lib/constants";
 import { getPeriodBounds } from "@/features/reports/periods";
 import { getSalesPeriodBounds } from "@/features/sales/periods";

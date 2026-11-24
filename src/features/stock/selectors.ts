@@ -1,3 +1,4 @@
+/** Catalogue filters, summary counts, and movement history queries. */
 import {
   getActiveProducts,
   getInStockProducts,

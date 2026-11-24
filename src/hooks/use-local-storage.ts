@@ -1,5 +1,10 @@
 "use client";
 
+/**
+ * React binding for a single localStorage key. Listens to native `storage`
+ * events (other tabs) and a custom event (same tab) so UI stays in sync.
+ */
+
 import { useCallback, useRef, useSyncExternalStore } from "react";
 
 import { writeLocalStorage } from "@/lib/storage";

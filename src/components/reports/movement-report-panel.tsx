@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Chronological stock in/out from real StockMovement records (no generated rows).
+ */
 import {
   ArrowDownLeft,
   ArrowUpRight,
@@ -97,6 +100,7 @@ export function MovementReportPanel({
 
   return (
     <div className="space-y-6">
+      {/* In / out totals from real StockMovement rows in the date range */}
       <ReportKpiCards
         cards={[
           {
@@ -138,6 +142,7 @@ export function MovementReportPanel({
         columns="grid-cols-1 sm:grid-cols-2 xl:grid-cols-5"
       />
 
+      {/* Chronological ledger: product, type, qty, reference */}
       <section className="overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-1 ring-border">
         <div className="flex flex-col gap-3 p-4 lg:flex-row lg:flex-wrap lg:items-center">
           <SearchInput

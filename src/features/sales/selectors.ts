@@ -1,3 +1,4 @@
+/** Filter, search, paginate, and summarise the sales list. */
 import {
   formatChartTick,
   isWithinRange,

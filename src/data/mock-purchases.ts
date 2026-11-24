@@ -1,3 +1,4 @@
+/** Seed purchase orders and receipts used until the operator creates their own. */
 import { calculatePurchaseTotals } from "@/features/purchase/calculations";
 import type { Purchase, PurchaseStatus } from "@/types/purchase";
 import type { PaymentMethod, PaymentStatus } from "@/types/sales";

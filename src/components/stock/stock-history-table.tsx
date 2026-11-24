@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Movement rows with signed quantity and reference id.
+ */
 import { EmptyState } from "@/components/shared/empty-state";
 import {
   Table,

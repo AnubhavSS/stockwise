@@ -1,3 +1,4 @@
+/** Seed invoices clustered around APP_NOW so dashboard and reports look populated. */
 import { calculateSaleTotals } from "@/features/sales/calculations";
 import type { PaymentMethod, Sale } from "@/types/sales";
 

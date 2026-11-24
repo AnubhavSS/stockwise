@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Purchase title and create-order action.
+ */
 import { Download, Plus } from "lucide-react";
 
 import { PageHeader } from "@/components/shared/page-header";

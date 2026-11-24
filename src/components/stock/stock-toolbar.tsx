@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Search, category, and status filters.
+ */
 import { SearchInput } from "@/components/shared/search-input";
 import { Button } from "@/components/ui/button";
 import {

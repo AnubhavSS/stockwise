@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Debounced search field for toolbars.
+ */
 import { Search } from "lucide-react";
 import { type KeyboardEventHandler, type ReactNode } from "react";
 

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Sales analysis: summary, trend, payment mix, top products, and filtered invoices.
+ */
 import { Banknote, Package, Receipt, ShoppingCart, Wallet } from "lucide-react";
 
 import { PaymentDistributionChart } from "@/components/reports/payment-distribution-chart";
@@ -90,6 +93,7 @@ export function SalesReportPanel({
 
   return (
     <div className="space-y-6">
+      {/* Completed-sales KPIs for the selected date range */}
       <ReportKpiCards
         cards={[
           {
@@ -133,6 +137,7 @@ export function SalesReportPanel({
         columns="grid-cols-1 sm:grid-cols-2 xl:grid-cols-5"
       />
 
+      {/* Trend plus paid / partial / unpaid mix (order counts) */}
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <div className="xl:col-span-2">
           <SalesPerformanceChart data={series} />
@@ -140,6 +145,7 @@ export function SalesReportPanel({
         <PaymentDistributionChart slices={summary.paymentSlices} />
       </div>
 
+      {/* Units, revenue, and % of completed sales revenue */}
       <Card className="border-border bg-card shadow-sm ring-1 ring-border">
         <CardHeader>
           <CardTitle>Top Selling Products</CardTitle>
@@ -175,6 +181,7 @@ export function SalesReportPanel({
         </CardContent>
       </Card>
 
+      {/* Invoices in range, after search and status filters */}
       <section className="overflow-hidden rounded-xl border border-border bg-card shadow-sm ring-1 ring-border">
         <div className="flex flex-col gap-3 p-4 lg:flex-row lg:items-center">
           <SearchInput

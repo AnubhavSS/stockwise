@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Single product: current stock, recent movements, and actions.
+ */
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
@@ -98,6 +101,7 @@ export function ProductDetails({ productId }: ProductDetailsProps) {
         </Button>
       </div>
 
+      {/* Edit changes catalogue fields; Adjust Stock is the quantity path */}
       <PageHeader
         title={product.name}
         description={`${product.sku} · ${product.category}${product.isActive ? "" : " · Archived"}`}
@@ -124,6 +128,7 @@ export function ProductDetails({ productId }: ProductDetailsProps) {
         <StockStatusBadge product={product} />
       </div>
 
+      {/* On-hand qty, value, reorder point */}
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {summaryCards.map((card) => (
           <Card
@@ -138,6 +143,7 @@ export function ProductDetails({ productId }: ProductDetailsProps) {
         ))}
       </section>
 
+      {/* History is the ledger; Details is catalogue fields; Documents are linked sales/POs */}
       <Tabs defaultValue="history">
         <TabsList variant="line" className="w-full justify-start">
           <TabsTrigger value="history">Stock History</TabsTrigger>

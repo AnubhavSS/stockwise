@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * All / Low stock / Out of stock.
+ */
 import { formatNumber } from "@/lib/calculations";
 import { cn } from "@/lib/utils";
 import type { StockSummary, StockTab } from "@/features/stock/selectors";

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Purchase value trend for counted orders.
+ */
 import { CalendarRange } from "lucide-react";
 import {
   Area,

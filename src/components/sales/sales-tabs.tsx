@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * All / Completed / Pending payment / Cancelled.
+ */
 import { formatNumber } from "@/lib/calculations";
 import { cn } from "@/lib/utils";
 import type { SalesTab } from "@/features/sales/selectors";

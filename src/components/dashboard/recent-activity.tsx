@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Latest sales, receipts, and stock adjustments from the inventory activity feed.
+ */
 import Link from "next/link";
 import {
   ClipboardPen,
@@ -46,6 +49,7 @@ export function RecentActivity({ activities }: RecentActivityProps) {
     <Card className="flex h-full flex-col border-border bg-card shadow-sm ring-1 ring-border">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>Recent Activity</CardTitle>
+        {/* Full history lives on Reports → Overview */}
         <Link
           href="/reports"
           className="text-sm font-medium text-primary hover:underline"

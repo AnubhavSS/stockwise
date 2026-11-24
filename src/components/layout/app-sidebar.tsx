@@ -1,8 +1,11 @@
 "use client";
 
+/**
+ * Primary module links plus Customers/Suppliers. Collapses to icons on desktop.
+ */
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { ChevronsLeft, ChevronsRight } from "lucide-react";
 
 import { Brand } from "@/components/layout/brand";
 import { Button } from "@/components/ui/button";
@@ -93,6 +96,7 @@ export function AppSidebar({
   const sidebarCollapsed = useUiStore((state) => state.sidebarCollapsed);
   const toggleSidebar = useUiStore((state) => state.toggleSidebar);
   const collapsed = forceExpanded ? false : sidebarCollapsed;
+  const collapseLabel = collapsed ? "Expand sidebar" : "Collapse sidebar";
 
   return (
     <aside
@@ -101,24 +105,46 @@ export function AppSidebar({
         className,
       )}
     >
-      <div className="flex h-16 items-center justify-between gap-2 px-4">
-        <Brand compact={collapsed} />
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          className="hidden text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-foreground lg:inline-flex"
-          onClick={toggleSidebar}
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {collapsed ? (
-            <PanelLeftOpen className="size-4" />
-          ) : (
-            <PanelLeftClose className="size-4" />
-          )}
-        </Button>
+      {/* Logo + full toggle inside the rail so nothing is clipped */}
+      <div
+        className={cn(
+          "flex gap-2",
+          collapsed
+            ? "flex-col items-center px-2 py-3"
+            : "h-16 min-w-0 items-center justify-between px-3",
+        )}
+      >
+        <div className={cn(!collapsed && "min-w-0 flex-1")}>
+          <Brand compact={collapsed} />
+        </div>
+        {!forceExpanded ? (
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Button
+                  type="button"
+                  size="icon-sm"
+                  aria-label={collapseLabel}
+                  onClick={toggleSidebar}
+                  className="size-8 shrink-0 rounded-full border border-white/40 bg-white text-[#111C32] shadow-sm hover:bg-white hover:text-[#111C32]"
+                />
+              }
+            >
+              {collapsed ? (
+                <ChevronsRight className="size-4" />
+              ) : (
+                <ChevronsLeft className="size-4" />
+              )}
+            </TooltipTrigger>
+            <TooltipContent side={collapsed ? "right" : "bottom"}>
+              {collapseLabel}
+            </TooltipContent>
+          </Tooltip>
+        ) : null}
       </div>
       <Separator className="bg-sidebar-border" />
       <ScrollArea className="flex-1 px-3 py-4">
+        {/* Operating modules: Dashboard, Sales, Purchase, Stock, Reports */}
         <nav aria-label="Primary" className="space-y-1">
           {primaryNav.map((item) => (
             <NavLink
@@ -130,6 +156,7 @@ export function AppSidebar({
           ))}
         </nav>
         <Separator className="my-4 bg-sidebar-border" />
+        {/* Directory pages (placeholders that already back sales/purchase forms) */}
         <nav aria-label="Directory" className="space-y-1">
           {secondaryNav.map((item) => (
             <NavLink

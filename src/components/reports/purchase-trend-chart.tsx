@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Purchase order value over time for counted (non-draft, non-cancelled) POs.
+ */
 import {
   Area,
   AreaChart,

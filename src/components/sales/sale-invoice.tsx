@@ -1,3 +1,7 @@
+/**
+ * Printable invoice layout.
+ */
+
 import { siteConfig } from "@/config/site";
 import { itemCount } from "@/features/sales/calculations";
 import { customerName } from "@/features/sales/selectors";
@@ -25,6 +29,7 @@ export function SaleInvoice({ sale, customers, products }: SaleInvoiceProps) {
       id="sale-invoice"
       className="rounded-xl border border-border bg-card p-6 text-sm shadow-sm print:border-0 print:shadow-none"
     >
+      {/* Printable header: company on the left, invoice number on the right */}
       <header className="flex flex-col justify-between gap-4 border-b border-border pb-4 sm:flex-row">
         <div>
           <p className="text-lg font-semibold">{siteConfig.name}</p>
@@ -37,6 +42,7 @@ export function SaleInvoice({ sale, customers, products }: SaleInvoiceProps) {
         </div>
       </header>
 
+      {/* Customer bill-to and payment summary */}
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
           <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
@@ -66,6 +72,7 @@ export function SaleInvoice({ sale, customers, products }: SaleInvoiceProps) {
         </div>
       </div>
 
+      {/* Line items: qty × price − discount */}
       <table className="mt-6 w-full text-left">
         <thead>
           <tr className="border-b border-border text-xs text-muted-foreground">

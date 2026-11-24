@@ -1,3 +1,4 @@
+/** Purchase orders. Wrapped in Suspense because filters read search params. */
 import type { Metadata } from "next";
 import { Suspense } from "react";
 

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Greeting, 7/30/90 day period, and shortcuts to create a sale or purchase.
+ */
 import { CalendarRange } from "lucide-react";
 
 import {
@@ -27,14 +30,16 @@ export function DashboardHeader({
 }: DashboardHeaderProps) {
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      {/* Personal greeting against the demo clock */}
       <div className="space-y-1">
         <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-          {getTimeOfDayGreeting()}, {siteConfig.demoUser.firstName}
+          {getTimeOfDayGreeting()}, {"John Doe"}
         </h1>
         <p className="text-sm text-muted-foreground">
           Here&apos;s what&apos;s happening with your inventory today.
         </p>
       </div>
+      {/* Last 7 / 30 / 90 days — this is the dashboard period, not Reports */}
       <Select
         value={period}
         onValueChange={(value) => {

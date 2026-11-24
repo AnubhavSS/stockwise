@@ -1,3 +1,7 @@
+/**
+ * Order value, received vs pending, and outstanding supplier payments.
+ */
+
 import { ClipboardList, PackageSearch, ShoppingBag, Wallet } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
@@ -45,6 +49,7 @@ export function PurchaseSummaryCards({ summary }: PurchaseSummaryCardsProps) {
 
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {/* Drafts and cancelled POs are excluded from these totals */}
       {cards.map((card) => {
         const Icon = card.icon;
         const positive = (card.trend ?? 0) >= 0;

@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Reports screen: shared date range, export, tabs, and the active report panel.
+ */
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
@@ -202,12 +205,14 @@ export function ReportsWorkspace() {
 
   return (
     <div className="space-y-6">
+      {/* Title, global date range, CSV / print */}
       <ReportsPageHeader
         range={range}
         onRangeChange={changeRange}
         onExportCsv={handleExport}
         onPrint={() => window.print()}
       />
+      {/* Switching tabs stays on /reports — only the panel below changes */}
       <ReportsTabs value={tab} onValueChange={changeTab} />
 
       {tab === "overview" ? (

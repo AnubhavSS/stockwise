@@ -1,5 +1,8 @@
 "use client";
 
+/**
+ * Invoice view with pay, complete, cancel, and print.
+ */
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -67,6 +70,7 @@ export function SaleDetails({ saleId }: SaleDetailsProps) {
 
   return (
     <div className="space-y-6">
+      {/* Screen chrome is hidden when printing the invoice */}
       <div className="print:hidden">
         <Button
           variant="ghost"
@@ -121,6 +125,7 @@ export function SaleDetails({ saleId }: SaleDetailsProps) {
         />
       </div>
 
+      {/* Totals for the operator; the printable document is SaleInvoice below */}
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4 print:hidden">
         {[
           { title: "Total Amount", value: formatCurrency(sale.totalAmount) },
