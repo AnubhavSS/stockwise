@@ -179,5 +179,5 @@ export function sumPurchaseTotals(purchases: Purchase[]): number {
 }
 
 export function purchaseActivityDate(purchase: Purchase): string {
-  return purchase.receivedDate ?? purchase.expectedDate;
+  return purchase.receivedDate ?? purchase.date ?? purchase.expectedDate;
 }

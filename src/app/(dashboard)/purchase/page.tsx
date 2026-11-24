@@ -1,22 +1,17 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
-import { ModulePlaceholder } from "@/components/shared/module-placeholder";
+import { LoadingState } from "@/components/shared/loading-state";
+import { PurchaseWorkspace } from "@/components/purchase/purchase-workspace";
 
 export const metadata: Metadata = {
-  title: "Purchase",
+  title: "Purchases",
 };
 
 export default function PurchasePage() {
   return (
-    <ModulePlaceholder
-      title="Purchase"
-      description="Raise purchase orders, receive goods and restock inventory."
-      highlights={[
-        "Purchase order list with supplier context",
-        "Partial and full goods receipt",
-        "Stock increase through purchase movements",
-        "Expected versus received dates",
-      ]}
-    />
+    <Suspense fallback={<LoadingState rows={8} />}>
+      <PurchaseWorkspace />
+    </Suspense>
   );
 }

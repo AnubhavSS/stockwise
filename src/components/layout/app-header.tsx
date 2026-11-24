@@ -28,6 +28,7 @@ import {
 import { getNavItemByPath } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { useInventoryStore } from "@/store/inventory-store";
+import { usePurchaseStore } from "@/store/purchase-store";
 import { useSalesStore } from "@/store/sales-store";
 import { useUiStore } from "@/store/ui-store";
 
@@ -41,6 +42,7 @@ export function AppHeader() {
   const setMobileNavOpen = useUiStore((state) => state.setMobileNavOpen);
   const products = useInventoryStore((state) => state.products);
   const sales = useSalesStore((state) => state.sales);
+  const purchases = usePurchaseStore((state) => state.purchases);
   const [searchOpen, setSearchOpen] = useState(false);
   const shortcut = "Ctrl K";
 
@@ -74,8 +76,20 @@ export function AppHeader() {
         href: `/sales/${sale.id}`,
       }));
 
-    return [...productHits, ...saleHits];
-  }, [globalSearch, products, sales]);
+    const purchaseHits = purchases
+      .filter((purchase) =>
+        purchase.purchaseOrderNumber.toLowerCase().includes(query),
+      )
+      .slice(0, 3)
+      .map((purchase) => ({
+        id: purchase.id,
+        title: purchase.purchaseOrderNumber,
+        hint: "Purchase order",
+        href: `/purchase/${purchase.id}`,
+      }));
+
+    return [...productHits, ...saleHits, ...purchaseHits];
+  }, [globalSearch, products, purchases, sales]);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {

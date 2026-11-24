@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { PackagePlus, ShoppingBag, ShoppingCart } from "lucide-react";
-import { toast } from "sonner";
 
 import { AddItemDialog } from "@/components/dashboard/add-item-dialog";
 import { Button } from "@/components/ui/button";
@@ -25,9 +24,7 @@ export function QuickActions() {
         <Button
           variant="outline"
           className="bg-card"
-          onClick={() =>
-            toast.info("New Purchase will open from the Purchase module in the next step.")
-          }
+          render={<Link href="/purchase?create=1" />}
         >
           <ShoppingBag />
           New Purchase

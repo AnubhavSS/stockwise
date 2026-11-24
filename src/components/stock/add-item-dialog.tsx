@@ -31,14 +31,19 @@ import {
   type ProductFormValues,
 } from "@/features/stock/validation";
 import { useInventoryStore } from "@/store/inventory-store";
-import { PRODUCT_CATEGORIES } from "@/types/inventory";
+import { PRODUCT_CATEGORIES, type Product } from "@/types/inventory";
 
 type AddItemDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onCreated?: (product: Product) => void;
 };
 
-export function AddItemDialog({ open, onOpenChange }: AddItemDialogProps) {
+export function AddItemDialog({
+  open,
+  onOpenChange,
+  onCreated,
+}: AddItemDialogProps) {
   const addProduct = useInventoryStore((state) => state.addProduct);
   const products = useInventoryStore((state) => state.products);
   const [values, setValues] = useState<ProductFormValues>(emptyProductForm());
@@ -94,6 +99,7 @@ export function AddItemDialog({ open, onOpenChange }: AddItemDialogProps) {
     }
 
     toast.success(`${result.name} added to inventory.`);
+    onCreated?.(result);
     handleOpenChange(false);
   }
 

@@ -22,7 +22,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     <div className="flex min-h-screen bg-background">
       <div
         className={cn(
-          "sticky top-0 hidden h-screen shrink-0 transition-[width] duration-200 lg:block",
+          "sticky top-0 hidden h-screen shrink-0 transition-[width] duration-200 print:hidden lg:block",
           sidebarCollapsed ? "w-[76px]" : "w-64",
         )}
       >
@@ -42,7 +42,9 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         </SheetContent>
       </Sheet>
       <div className="flex min-w-0 flex-1 flex-col">
-        <AppHeader />
+        <div className="print:hidden">
+          <AppHeader />
+        </div>
         <main className="flex-1">
           <PageContainer>{children}</PageContainer>
         </main>

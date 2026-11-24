@@ -7,6 +7,7 @@ export type Supplier = {
   email: string;
   phone: string;
   city: string;
+  address: string;
   gstin: string;
   status: SupplierStatus;
   leadTimeDays: number;

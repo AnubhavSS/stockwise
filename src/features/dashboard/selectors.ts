@@ -25,7 +25,6 @@ import type { Sale } from "@/types/sales";
 
 const ACTIVE_SALE_STATUSES: Sale["status"][] = ["completed"];
 const ACTIVE_PURCHASE_STATUSES: Purchase["status"][] = [
-  "draft",
   "ordered",
   "partially_received",
   "received",
