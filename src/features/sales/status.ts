@@ -1,10 +1,9 @@
 import type { StatusTone } from "@/types/common";
-import type { PaymentStatus, SaleStatus } from "@/types/sales";
+import type { PaymentMethod, PaymentStatus, SaleStatus } from "@/types/sales";
 
 export const saleStatusLabel: Record<SaleStatus, string> = {
   draft: "Draft",
-  confirmed: "Confirmed",
-  fulfilled: "Fulfilled",
+  completed: "Completed",
   cancelled: "Cancelled",
 };
 
@@ -14,10 +13,16 @@ export const paymentStatusLabel: Record<PaymentStatus, string> = {
   paid: "Paid",
 };
 
+export const paymentMethodLabel: Record<PaymentMethod, string> = {
+  cash: "Cash",
+  upi: "UPI",
+  card: "Card",
+  bank_transfer: "Bank Transfer",
+};
+
 export const saleStatusTone: Record<SaleStatus, StatusTone> = {
   draft: "neutral",
-  confirmed: "warning",
-  fulfilled: "success",
+  completed: "success",
   cancelled: "danger",
 };
 

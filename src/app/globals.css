@@ -104,3 +104,20 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+@media print {
+  aside,
+  header,
+  [data-slot="sheet"],
+  .print\:hidden {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  body {
+    background: white !important;
+  }
+}

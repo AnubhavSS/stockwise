@@ -1,4 +1,5 @@
 import { APP_NOW_ISO } from "@/lib/constants";
+import type { PaginatedResult } from "@/types/common";
 import type { Product } from "@/types/inventory";
 import type { Purchase } from "@/types/purchase";
 import type { Sale } from "@/types/sales";
@@ -149,6 +150,24 @@ export function percentChange(current: number, previous: number): number {
 export function isWithinRange(isoDate: string, start: Date, end: Date): boolean {
   const time = new Date(isoDate).getTime();
   return time >= start.getTime() && time <= end.getTime();
+}
+
+export function paginateItems<T>(
+  items: T[],
+  page: number,
+  pageSize: number,
+): PaginatedResult<T> {
+  const total = items.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const safePage = Math.min(Math.max(1, page), totalPages);
+  const start = (safePage - 1) * pageSize;
+
+  return {
+    items: items.slice(start, start + pageSize),
+    total,
+    page: safePage,
+    pageSize,
+  };
 }
 
 export function sumSaleTotals(sales: Sale[]): number {

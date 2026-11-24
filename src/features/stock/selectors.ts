@@ -3,10 +3,12 @@ import {
   getInStockProducts,
   getLowStockProducts,
   getOutOfStockProducts,
+  paginateItems,
 } from "@/lib/calculations";
 import { getStockStatus, matchesStockStatus } from "@/features/stock/status";
-import type { PaginatedResult } from "@/types/common";
 import type { Product, ProductCategory, StockMovement, StockMovementType, StockStatus } from "@/types/inventory";
+
+export { paginateItems };
 
 export type StockTab = "all" | "low_stock" | "out_of_stock";
 
@@ -89,24 +91,6 @@ export function hasActiveStockFilters(filters: StockFilters): boolean {
     filters.status !== "all" ||
     filters.tab !== "all"
   );
-}
-
-export function paginateItems<T>(
-  items: T[],
-  page: number,
-  pageSize: number,
-): PaginatedResult<T> {
-  const total = items.length;
-  const totalPages = Math.max(1, Math.ceil(total / pageSize));
-  const safePage = Math.min(Math.max(1, page), totalPages);
-  const start = (safePage - 1) * pageSize;
-
-  return {
-    items: items.slice(start, start + pageSize),
-    total,
-    page: safePage,
-    pageSize,
-  };
 }
 
 export function skuExists(products: Product[], sku: string, excludeId?: string): boolean {

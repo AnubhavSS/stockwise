@@ -138,6 +138,33 @@ export function applyStockMovement({
   };
 }
 
+export function applyStockMovementBatch({
+  products,
+  movements,
+}: {
+  products: Product[];
+  movements: StockTransactionInput[];
+}):
+  | { ok: true; products: Product[]; movements: StockMovement[] }
+  | StockTransactionFailure {
+  let currentProducts = products;
+  const applied: StockMovement[] = [];
+
+  for (const movement of movements) {
+    const result = applyStockMovement({
+      products: currentProducts,
+      movement,
+    });
+    if (!result.ok) {
+      return result;
+    }
+    currentProducts = result.products;
+    applied.push(result.movement);
+  }
+
+  return { ok: true, products: currentProducts, movements: applied };
+}
+
 export function saleQuantityChange(quantitySold: number): number {
   return -Math.abs(quantitySold);
 }

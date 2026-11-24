@@ -7,7 +7,9 @@ import { STORAGE_KEYS } from "@/lib/constants";
 import { zustandStorage } from "@/lib/storage";
 import {
   applyStockMovement,
+  applyStockMovementBatch,
   computeAdjustment,
+  type StockTransactionInput,
   type StockTransactionResult,
 } from "@/lib/stock-transactions";
 import type { Activity } from "@/types/common";
@@ -37,6 +39,12 @@ type InventoryState = {
   recordMovement: (
     movement: Omit<StockMovement, "id" | "createdAt">,
   ) => StockTransactionResult;
+  recordMovements: (
+    movements: StockTransactionInput[],
+    activity?: Omit<Activity, "id" | "createdAt">,
+  ) =>
+    | { ok: true; products: Product[]; movements: StockMovement[] }
+    | { ok: false; error: string };
   addActivity: (activity: Omit<Activity, "id" | "createdAt">) => void;
   reset: () => void;
 };
@@ -277,6 +285,26 @@ export const useInventoryStore = create<InventoryState>()(
             referenceId: result.movement.referenceId,
             quantityChange: input.quantityChange,
           }),
+        });
+
+        return result;
+      },
+      recordMovements: (movements, activity) => {
+        const result = applyStockMovementBatch({
+          products: get().products,
+          movements,
+        });
+
+        if (!result.ok) {
+          return result;
+        }
+
+        set({
+          products: result.products,
+          stockMovements: [...result.movements].reverse().concat(get().stockMovements),
+          activities: activity
+            ? prependActivity(get().activities, activity)
+            : get().activities,
         });
 
         return result;

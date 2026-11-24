@@ -61,7 +61,7 @@ export function AppHeader() {
         id: product.id,
         title: product.name,
         hint: product.sku,
-        href: "/stock",
+        href: `/stock/${product.id}`,
       }));
 
     const saleHits = sales
@@ -71,7 +71,7 @@ export function AppHeader() {
         id: sale.id,
         title: sale.invoiceNumber,
         hint: "Sales invoice",
-        href: "/sales",
+        href: `/sales/${sale.id}`,
       }));
 
     return [...productHits, ...saleHits];

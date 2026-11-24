@@ -23,11 +23,7 @@ import type { Product } from "@/types/inventory";
 import type { Purchase } from "@/types/purchase";
 import type { Sale } from "@/types/sales";
 
-const ACTIVE_SALE_STATUSES: Sale["status"][] = [
-  "draft",
-  "confirmed",
-  "fulfilled",
-];
+const ACTIVE_SALE_STATUSES: Sale["status"][] = ["completed"];
 const ACTIVE_PURCHASE_STATUSES: Purchase["status"][] = [
   "draft",
   "ordered",
@@ -102,9 +98,7 @@ export function deriveDashboardStats(input: {
     lowStockCount: getAttentionProducts(catalog).length,
     outOfStockCount: getOutOfStockProducts(catalog).length,
     inStockCount: getInStockProducts(catalog).length,
-    openSalesCount: input.sales.filter(
-      (sale) => sale.status === "draft" || sale.status === "confirmed",
-    ).length,
+    openSalesCount: input.sales.filter((sale) => sale.status === "draft").length,
     openPurchaseCount: input.purchases.filter(
       (purchase) =>
         purchase.status === "ordered" || purchase.status === "partially_received",

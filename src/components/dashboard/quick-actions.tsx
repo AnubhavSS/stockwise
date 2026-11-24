@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { PackagePlus, ShoppingBag, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 
@@ -16,9 +17,7 @@ export function QuickActions() {
         <Button
           variant="outline"
           className="bg-card"
-          onClick={() =>
-            toast.info("New Sale will open from the Sales module in the next step.")
-          }
+          render={<Link href="/sales?create=1" />}
         >
           <ShoppingCart />
           New Sale

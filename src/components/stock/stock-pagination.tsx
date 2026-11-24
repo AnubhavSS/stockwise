@@ -18,6 +18,7 @@ type StockPaginationProps = {
   page: number;
   pageSize: number;
   total: number;
+  noun?: string;
   onPageChange: (page: number) => void;
   onPageSizeChange: (pageSize: number) => void;
 };
@@ -26,6 +27,7 @@ export function StockPagination({
   page,
   pageSize,
   total,
+  noun = "items",
   onPageChange,
   onPageSizeChange,
 }: StockPaginationProps) {
@@ -36,7 +38,7 @@ export function StockPagination({
   return (
     <div className="flex flex-col gap-3 border-t border-border px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
       <p className="text-sm text-muted-foreground">
-        Showing {formatNumber(from)}-{formatNumber(to)} of {formatNumber(total)} items
+        Showing {formatNumber(from)}-{formatNumber(to)} of {formatNumber(total)} {noun}
       </p>
       <div className="flex flex-wrap items-center gap-2">
         <label className="flex items-center gap-2 text-sm text-muted-foreground">
